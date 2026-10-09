@@ -1,0 +1,54 @@
+{
+  "packageId": "TW-TPE",
+  "version": "2026.10.09-b46",
+  "schemaVersion": 2,
+  "region": "台灣示範資料包",
+  "createdAt": "2026-10-09T14:42:29.169Z",
+  "requires": [
+    "routing",
+    "search-index",
+    "traffic",
+    "driver-alerts",
+    "weather",
+    "parking"
+  ],
+  "files": [
+    {
+      "path": "./data/routes.json",
+      "size": 2614,
+      "sha256": "b7916905893ab80015e3274a7752d6efa6f8af03be2d6e43f3454127bbfde417"
+    },
+    {
+      "path": "./data/places.json",
+      "size": 1319,
+      "sha256": "a63ce43f7e28db7313fbdf677b8494b45ffc6c7ec32e2d95c60359df84da8be8"
+    },
+    {
+      "path": "./data/traffic.json",
+      "size": 857,
+      "sha256": "f2a7ac9854ce465517b6f950ee9c8ad6b4872633f2aed8ada84a7ad786e10997"
+    },
+    {
+      "path": "./data/driver-alerts.json",
+      "size": 1382,
+      "sha256": "e55b4ba6e98e304838968499da495261363197f17e6ff951306502e5a43ab471"
+    },
+    {
+      "path": "./data/cities.json",
+      "size": 694,
+      "sha256": "55cb82f99dc981b5f16cee06d490f687ca4954dfd291417318779e6e1c866374"
+    },
+    {
+      "path": "./data/weather.json",
+      "size": 354,
+      "sha256": "3a4de3abb356c46824f954c99d5cc7a8154fc5df0c704b8f66979bd3bf44df6c"
+    },
+    {
+      "path": "./data/parking.json",
+      "size": 654,
+      "sha256": "e2b74c11d04981d112d8928cb1ec88625ebc55c2c4e75d2aa2bfbcbf923e993e"
+    }
+  ],
+  "sizeBytes": 7874,
+  "sha256": "d7a51b910bb3767b1bbfeba755fefec4008ead1c2a8e7737a2861f4702847366"
+}

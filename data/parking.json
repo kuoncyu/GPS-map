@@ -1,0 +1,6 @@
+[
+ {"id":"P01","name":"北安停車場","lat":25.0492,"lng":121.5265,"spaces":86,"available":31,"price":"30 元／小時","type":"停車場","isLive":false},
+ {"id":"P02","name":"中央廣場地下停車場","lat":25.0477,"lng":121.5322,"spaces":220,"available":74,"price":"40 元／小時","type":"地下停車場","isLive":false},
+ {"id":"P03","name":"河岸停車場","lat":25.0462,"lng":121.5412,"spaces":120,"available":18,"price":"30 元／小時","type":"停車場","isLive":false},
+ {"id":"P04","name":"科技園區停車場","lat":25.0510,"lng":121.5410,"spaces":160,"available":52,"price":"40 元／小時","type":"停車場","isLive":false}
+]

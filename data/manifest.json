@@ -1,0 +1,12 @@
+{
+  "name": "AI GPS 導航系統",
+  "short_name": "AI GPS",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#07101d",
+  "theme_color": "#101827",
+  "lang": "zh-Hant",
+  "scope": "./",
+  "version": "1.1.0-b60",
+  "description": "離線優先、可在無網路環境獨立導航的 AI 智慧車用 GPS 系統"
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "driver-assistance-1",
+  "region": "Taipei-Demo",
+  "source": "DEMO_OFFLINE_SNAPSHOT",
+  "isLive": false,
+  "speedLimits": {
+    "CITY": 50,
+    "HIGHWAY": 80,
+    "UNPAVED": 30
+  },
+  "hazards": [
+    {
+      "id": "A1",
+      "type": "SHARP_TURN",
+      "lat": 25.0472,
+      "lng": 121.5378,
+      "radius": 140,
+      "severity": "MEDIUM",
+      "message": "前方彎道，請減速並注意轉向"
+    },
+    {
+      "id": "A2",
+      "type": "SCHOOL_ZONE",
+      "lat": 25.0435,
+      "lng": 121.529,
+      "radius": 180,
+      "severity": "HIGH",
+      "message": "前方注意慢行區域（Demo）"
+    },
+    {
+      "id": "A3",
+      "type": "ROAD_HAZARD",
+      "lat": 25.046,
+      "lng": 121.544,
+      "radius": 160,
+      "severity": "MEDIUM",
+      "message": "前方道路風險區，請保持安全車距"
+    },
+    {
+      "id": "A4",
+      "type": "LOW_VISIBILITY",
+      "lat": 25.054,
+      "lng": 121.528,
+      "radius": 180,
+      "severity": "LOW",
+      "message": "前方視線不佳區域（Demo）"
+    }
+  ],
+  "speedLimitsByRoad": {
+    "中央大道": 50,
+    "科技路": 60,
+    "科技路快速道路": 80,
+    "北安路": 50,
+    "河岸路": 50,
+    "河岸快速道路": 80,
+    "南側道路": 50,
+    "中山北路": 50,
+    "老街道路": 30,
+    "河岸連絡道": 50,
+    "科技支線": 50,
+    "北側大道": 50
+  }
+}

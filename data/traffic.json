@@ -1,0 +1,13 @@
+{
+  "schema":"offline-traffic-1",
+  "source":"DEMO_OFFLINE_SNAPSHOT",
+  "isLive":false,
+  "capturedAt":"2026-10-08T00:00:00+08:00",
+  "region":"Taipei-Demo",
+  "events":[
+    {"id":"T1","type":"CONGESTION","severity":"MEDIUM","road":"科技路","from":"N2","to":"N3","delaySeconds":75,"speedFactor":0.62,"message":"科技路壅塞（Demo）"},
+    {"id":"T2","type":"ACCIDENT","severity":"HIGH","road":"河岸路","from":"N2","to":"N4","delaySeconds":180,"speedFactor":0.35,"message":"河岸路事故警示（Demo）"},
+    {"id":"T3","type":"ROADWORK","severity":"LOW","road":"老街道路","from":"N5","to":"N6","delaySeconds":45,"speedFactor":0.75,"message":"老街道路施工（Demo）"},
+    {"id":"T4","type":"CLOSURE","severity":"HIGH","road":"河岸連絡道","from":"N9","to":"N8","blocked":true,"message":"河岸連絡道封閉（Demo）"}
+  ]
+}

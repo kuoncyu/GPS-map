@@ -1,0 +1,10 @@
+[
+ {"id":"poi-001","name":"中央咖啡館","category":"咖啡","address":"中央大道 88 號","lat":25.0485,"lng":121.5350,"rating":4.7,"tags":["咖啡","早餐","Wi-Fi"]},
+ {"id":"poi-002","name":"科技加油站","category":"加油","address":"科技路 120 號","lat":25.0510,"lng":121.5410,"rating":4.2,"tags":["加油","洗車"]},
+ {"id":"poi-003","name":"北安停車場","category":"停車","address":"北安路 36 號","lat":25.0492,"lng":121.5265,"rating":4.3,"tags":["停車","24小時"]},
+ {"id":"poi-004","name":"城市醫院","category":"醫院","address":"河岸路 10 號","lat":25.0445,"lng":121.5405,"rating":4.5,"tags":["急診","醫院"]},
+ {"id":"poi-005","name":"中央便利商店","category":"超商","address":"中山北路 220 號","lat":25.0435,"lng":121.5290,"rating":4.1,"tags":["超商","ATM"]},
+ {"id":"poi-006","name":"星河餐廳","category":"餐廳","address":"中央大道 155 號","lat":25.0472,"lng":121.5378,"rating":4.8,"tags":["餐廳","晚餐"]},
+ {"id":"poi-007","name":"河岸充電站","category":"充電","address":"河岸路 58 號","lat":25.0460,"lng":121.5440,"rating":4.6,"tags":["充電","快充"]},
+ {"id":"poi-008","name":"城市休息站","category":"休息站","address":"北安路 300 號","lat":25.0540,"lng":121.5280,"rating":4.4,"tags":["休息","廁所"]}
+]

@@ -1,0 +1,37 @@
+{
+  "schema": "offline-routing-1",
+  "region": "Taipei-Demo",
+  "nodes": [
+    {"id":"N0","lat":25.0478,"lng":121.5319,"name":"目前位置"},
+    {"id":"N1","lat":25.0485,"lng":121.5350,"name":"中央咖啡館"},
+    {"id":"N2","lat":25.0472,"lng":121.5378,"name":"星河餐廳"},
+    {"id":"N3","lat":25.0510,"lng":121.5410,"name":"科技加油站"},
+    {"id":"N4","lat":25.0445,"lng":121.5405,"name":"城市醫院"},
+    {"id":"N5","lat":25.0435,"lng":121.5290,"name":"中央便利商店"},
+    {"id":"N6","lat":25.0492,"lng":121.5265,"name":"北安停車場"},
+    {"id":"N7","lat":25.0540,"lng":121.5280,"name":"城市休息站"},
+    {"id":"N8","lat":25.0460,"lng":121.5440,"name":"河岸充電站"},
+    {"id":"N9","lat":25.0520,"lng":121.5360,"name":"東側轉接點"},
+    {"id":"N10","lat":25.0425,"lng":121.5360,"name":"南側轉接點"}
+  ],
+  "edges": [
+    {"from":"N0","to":"N1","distance":390,"seconds":55,"road":"中央大道","class":"CITY"},
+    {"from":"N1","to":"N2","distance":330,"seconds":44,"road":"中央大道","class":"CITY"},
+    {"from":"N2","to":"N3","distance":510,"seconds":50,"road":"科技路","class":"HIGHWAY"},
+    {"from":"N3","to":"N9","distance":590,"seconds":60,"road":"科技路快速道路","class":"HIGHWAY","toll":true},
+    {"from":"N9","to":"N7","distance":510,"seconds":66,"road":"北安路","class":"CITY"},
+    {"from":"N7","to":"N6","distance":430,"seconds":58,"road":"北安路","class":"CITY"},
+    {"from":"N6","to":"N0","distance":560,"seconds":72,"road":"北安路","class":"CITY"},
+    {"from":"N1","to":"N6","distance":610,"seconds":85,"road":"北安路","class":"CITY"},
+    {"from":"N2","to":"N4","distance":560,"seconds":70,"road":"河岸路","class":"CITY"},
+    {"from":"N4","to":"N8","distance":430,"seconds":52,"road":"河岸路","class":"CITY"},
+    {"from":"N8","to":"N3","distance":650,"seconds":68,"road":"河岸快速道路","class":"HIGHWAY","toll":true},
+    {"from":"N4","to":"N10","distance":410,"seconds":62,"road":"南側道路","class":"CITY"},
+    {"from":"N10","to":"N5","distance":520,"seconds":70,"road":"中山北路","class":"CITY"},
+    {"from":"N5","to":"N0","distance":470,"seconds":62,"road":"中山北路","class":"CITY"},
+    {"from":"N5","to":"N6","distance":540,"seconds":78,"road":"老街道路","class":"UNPAVED"},
+    {"from":"N9","to":"N8","distance":760,"seconds":88,"road":"河岸連絡道","class":"CITY","ferry":true},
+    {"from":"N1","to":"N9","distance":700,"seconds":92,"road":"科技支線","class":"CITY"},
+    {"from":"N7","to":"N3","distance":820,"seconds":100,"road":"北側大道","class":"CITY"}
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "source":"DEMO_OFFLINE_WEATHER_SNAPSHOT",
+  "isLive":false,
+  "observedAt":"2026-10-08T08:00:00+08:00",
+  "region":"Taipei Demo Region",
+  "condition":"多雲",
+  "temperatureC":27,
+  "humidity":78,
+  "visibilityKm":8,
+  "rainProbability":30,
+  "windKmh":16,
+  "driverRisk":{"level":"LOW","message":"目前 Demo 快照未發現高風險天候。"}
+}

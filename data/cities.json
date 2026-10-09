@@ -1,0 +1,7 @@
+[
+ {"id":"city-001","name":"中央市區","lat":25.0478,"lng":121.5319,"type":"CITY","importance":5,"description":"主要市區核心"},
+ {"id":"city-002","name":"北安區","lat":25.0540,"lng":121.5280,"type":"DISTRICT","importance":4,"description":"北側生活圈"},
+ {"id":"city-003","name":"河岸區","lat":25.0460,"lng":121.5440,"type":"DISTRICT","importance":4,"description":"河岸與休閒區域"},
+ {"id":"city-004","name":"科技園區","lat":25.0520,"lng":121.5360,"type":"DISTRICT","importance":5,"description":"科技產業聚落"},
+ {"id":"city-005","name":"南側新城","lat":25.0425,"lng":121.5360,"type":"DISTRICT","importance":3,"description":"南側住宅與商業區"}
+]
