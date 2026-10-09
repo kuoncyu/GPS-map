@@ -1,0 +1,21 @@
+{
+  "batch": 39,
+  "suite": "chromium-cdp-browser-smoke",
+  "executedAt": "2026-10-09T15:33:38.445Z",
+  "scope": "Real headless Chromium browser through Chrome DevTools Protocol; localhost static server. No mobile device/GPS hardware.",
+  "total": 1,
+  "passed": 0,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Chromium navigation to local app",
+      "status": "BLOCKED",
+      "detail": {
+        "title": "127.0.0.1",
+        "root": false,
+        "href": "chrome-error://chromewebdata/",
+        "body": "127.0.0.1 is blocked\n\nYour organization doesn’t allow you to view this site"
+      }
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "batch": 35,
+  "suite": "browser-contract-static-smoke",
+  "executedAt": "2026-10-09T08:48:02.090Z",
+  "note": "Static contract checks only; no real browser engine or device interaction is exercised.",
+  "total": 13,
+  "passed": 13,
+  "failed": 0,
+  "results": [
+    {
+      "name": "HTML document and app root",
+      "status": "PASS"
+    },
+    {
+      "name": "Mobile viewport",
+      "status": "PASS"
+    },
+    {
+      "name": "Search destination controls",
+      "status": "PASS"
+    },
+    {
+      "name": "Route planning controls",
+      "status": "PASS"
+    },
+    {
+      "name": "Navigation guidance indicators",
+      "status": "PASS"
+    },
+    {
+      "name": "Offline package controls",
+      "status": "PASS"
+    },
+    {
+      "name": "App references main flow controls",
+      "status": "PASS"
+    },
+    {
+      "name": "Service worker version matches release",
+      "status": "PASS"
+    },
+    {
+      "name": "Service worker offline fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "All precache assets exist",
+      "status": "PASS"
+    },
+    {
+      "name": "Required manifest and offline stylesheet",
+      "status": "PASS"
+    },
+    {
+      "name": "No duplicate IDs in HTML",
+      "status": "PASS"
+    },
+    {
+      "name": "Navigation modules exist",
+      "status": "PASS"
+    }
+  ]
+}

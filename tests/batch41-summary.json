@@ -1,0 +1,46 @@
+{
+  "batch": 41,
+  "version": "1.1.0-b41",
+  "gpsProviderTests": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "scope": "Node.js tests with simulated Geolocation API; no physical GPS hardware"
+  },
+  "routingIntegrationRegression": {
+    "passed": 8,
+    "failed": 0
+  },
+  "userFlowRegression": {
+    "passed": 11,
+    "failed": 0
+  },
+  "navigationRegression": {
+    "passed": 6,
+    "failed": 0
+  },
+  "browserContractRegression": {
+    "passed": 13,
+    "failed": 0,
+    "scope": "static source contracts"
+  },
+  "browserHarnessContractRegression": {
+    "passed": 8,
+    "failed": 0
+  },
+  "browserSmoke": {
+    "passed": 0,
+    "failed": 0,
+    "blocked": 1,
+    "reason": "Organization policy blocks 127.0.0.1 in this browser environment"
+  },
+  "staticQA": {
+    "javascriptFiles": 43,
+    "jsonFiles": 35,
+    "requiredFiles": 15,
+    "failed": 0
+  },
+  "offlinePipeline": "BATCH18_PIPELINE_OK",
+  "deviceGpsVerified": false,
+  "historicalBatch19to34FullyRecovered": false
+}
