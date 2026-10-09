@@ -1,0 +1,59 @@
+{
+  "batch": 52,
+  "version": "1.1.0-b52",
+  "suite": "offline-search-package-version-consistency",
+  "scope": "Node.js tests with injected package storage/fetch and route adapters; real browser IndexedDB and device validation not run",
+  "total": 12,
+  "passed": 12,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Search reads places.json from the active verified package without network access",
+      "status": "PASS"
+    },
+    {
+      "name": "Search results are refreshed when the active package record changes",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing places.json in an active package fails closed",
+      "status": "PASS"
+    },
+    {
+      "name": "Malformed active places JSON returns a clear error and does not use static fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "Invalid POI coordinate data is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Static fallback is used only when no active package exists",
+      "status": "PASS"
+    },
+    {
+      "name": "Storage lookup errors fail closed instead of silently switching to static POIs",
+      "status": "PASS"
+    },
+    {
+      "name": "Package switch during payload read is rejected to prevent mixed-version search",
+      "status": "PASS"
+    },
+    {
+      "name": "Routing rejects a search result from a different active package record",
+      "status": "PASS"
+    },
+    {
+      "name": "Routing accepts a search result from the matching package record",
+      "status": "PASS"
+    },
+    {
+      "name": "Search UI and AI assistant preserve source package metadata on selected destinations",
+      "status": "PASS"
+    },
+    {
+      "name": "Release version and service worker cache are aligned to Batch 52",
+      "status": "PASS"
+    }
+  ]
+}

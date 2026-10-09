@@ -1,0 +1,11 @@
+{
+  "batch": 44,
+  "version": "1.1.0-b44",
+  "suite": "navigation-gps-loss-safety",
+  "automatedChecks": {"batch44": {"passed": 8, "failed": 0}, "regressions": {"batch43": "8/8", "batch42": "6/6", "batch41": "9/9", "batch40Harness": "8/8", "batch38Routing": "8/8", "batch37UserFlow": "11/11", "batch36Navigation": "6/6", "batch35BrowserContract": "13/13"}},
+  "staticQA": {"javascriptFiles": 44, "jsonFiles": 48, "requiredFiles": 15, "failures": 0},
+  "offlinePipeline": "PASS",
+  "realBrowserSmoke": {"status": "BLOCKED", "reason": "127.0.0.1 is blocked by execution environment policy", "passed": 0, "failed": 0, "blocked": 1},
+  "physicalGps": "NOT_RUN",
+  "limitations": ["Synthetic coordinates and mocked router only", "No physical GPS validation", "Real browser UI and offline reload not verified", "Historical Batch 19-34 integration gap remains documented"]
+}

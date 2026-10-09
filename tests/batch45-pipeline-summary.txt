@@ -1,0 +1,9 @@
+Batch 45 release validation
+- Version: 1.1.0-b45
+- Batch 45 race safety: 8 passed / 0 failed
+- Regression suites: 77 passed / 0 failed
+- Total automated checks: 85 passed / 0 failed
+- Static QA: 0 failures
+- Offline pipeline: PASS (3 files, 7 nodes, 14 edges, 2 POIs)
+- Real Chromium smoke: BLOCKED (127.0.0.1 is blocked by execution environment policy; 0 passed, 0 failed, 1 blocked)
+- Physical GPS/device tests: NOT RUN

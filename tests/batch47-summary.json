@@ -1,0 +1,26 @@
+{
+  "batch": 47,
+  "version": "1.1.0-b47",
+  "feature": "offline-package-version-activation-rollback-and-recovery",
+  "focusedSuite": {"total": 11, "passed": 11, "failed": 0},
+  "regressionSuites": [
+    {"suite": "batch46-offline-package-integrity", "passed": 12, "failed": 0},
+    {"suite": "batch45-navigation-race-safety", "passed": 8, "failed": 0},
+    {"suite": "batch44-navigation-gps-safety", "passed": 8, "failed": 0},
+    {"suite": "batch43-gps-stale-monitor", "passed": 8, "failed": 0},
+    {"suite": "batch42-gps-quality", "passed": 6, "failed": 0},
+    {"suite": "batch41-gps-provider", "passed": 9, "failed": 0},
+    {"suite": "batch40-browser-harness-contract", "passed": 8, "failed": 0},
+    {"suite": "batch38-routing-integration", "passed": 8, "failed": 0},
+    {"suite": "batch37-user-flow-contract", "passed": 11, "failed": 0},
+    {"suite": "batch36-navigation-flow", "passed": 6, "failed": 0},
+    {"suite": "batch35-browser-contract", "passed": 13, "failed": 0}
+  ],
+  "automatedRegressionTotal": {"passed": 108, "failed": 0},
+  "staticQA": {"javascriptFiles": 45, "jsonFiles": 55, "requiredAssets": 16, "failed": 0},
+  "offlineDataPipeline": {"status": "PASS", "files": 3, "nodes": 7, "edges": 14, "pois": 2},
+  "chromiumSmoke": {"status": "BLOCKED", "passed": 0, "failed": 0, "blocked": 1, "reason": "127.0.0.1 is blocked by environment policy"},
+  "indexedDBBrowserFaultInjection": "NOT_RUN",
+  "physicalGPSValidation": "NOT_RUN",
+  "historicalGap": "Some changes from batches 19–34 are not recovered"
+}

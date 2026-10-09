@@ -1,0 +1,15 @@
+{
+  "suite": "batch56-navigation-gps-lifecycle",
+  "version": "1.1.0-b56",
+  "total": 12,
+  "passed": 12,
+  "failed": 0,
+  "coverage": [
+    "invalid or missing GPS coordinates pause navigation",
+    "GPS recovery requires valid route and destination",
+    "route is preserved during GPS loss and stop",
+    "stale reroute is discarded after destination change or substantial movement",
+    "successful reroute preserves offline package provenance",
+    "reroute failure cannot override a stopped navigation session"
+  ]
+}

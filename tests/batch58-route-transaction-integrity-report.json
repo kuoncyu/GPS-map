@@ -1,0 +1,53 @@
+{
+  "suite": "batch58-route-transaction-integrity",
+  "version": "1.1.0-b60",
+  "total": 11,
+  "passed": 11,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Valid planned route commits and synchronizes summary metrics",
+      "status": "PASS"
+    },
+    {
+      "name": "Invalid latitude in route points is rejected without replacing existing route",
+      "status": "PASS"
+    },
+    {
+      "name": "Invalid longitude in route points is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Zero distance is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Negative travel time is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Empty and one-point routes are rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Delayed request is rejected when destination changes",
+      "status": "PASS"
+    },
+    {
+      "name": "Older route request cannot overwrite newer request for same destination",
+      "status": "PASS"
+    },
+    {
+      "name": "Route commit preserves offline package provenance",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing destination is rejected without route mutation",
+      "status": "PASS"
+    },
+    {
+      "name": "Release version and service-worker cache are aligned",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "batch": 51,
+  "version": "1.1.0-b51",
+  "focus": "active offline package to routing engine integration",
+  "dedicatedSuite": "tests/batch51-offline-routing-package-integration.mjs",
+  "dedicatedPassed": 9,
+  "dedicatedFailed": 0,
+  "regressionSuites": 16,
+  "regressionChecksPassed": 146,
+  "regressionChecksFailed": 0,
+  "staticQa": {
+    "javascriptFiles": 45,
+    "jsonFiles": 63,
+    "requiredAssets": 16,
+    "failures": 0
+  },
+  "offlinePipeline": "passed: 3 source files, 7 nodes, 14 edges, 2 POIs",
+  "chromiumSmoke": "BLOCKED: environment policy blocks localhost; not counted as passed",
+  "realBrowserIndexedDBValidation": "not run",
+  "physicalDeviceValidation": "not run"
+}

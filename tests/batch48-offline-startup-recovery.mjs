@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {PackageManager} from '../js/package-manager.js';
+import {Storage} from '../js/storage.js';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const results=[];
+async function check(name,fn){try{await fn();results.push({name,status:'PASS'});}catch(e){results.push({name,status:'FAIL',error:e?.stack||e?.message||String(e)});}}
+const original={};for(const k of ['reconcileActivePackage','getActivePackage','listPackages','activatePackage','deletePackage'])original[k]=Storage[k];
+let records=[],activeId=null,reconcileCalls=0;
+const active=()=>records.find(x=>x.id===activeId)||null;
+const valid=x=>Boolean(x&&x.verified&&Array.isArray(x.payloads)&&x.payloads.length);
+Storage.reconcileActivePackage=async()=>{reconcileCalls++;const current=records.find(x=>x.id===activeId&&valid(x));if(current)return current;const candidates=records.filter(valid).sort((a,b)=>(b.installSequence||0)-(a.installSequence||0));activeId=candidates[0]?.id||null;return active();};
+Storage.getActivePackage=async()=>active();Storage.listPackages=async()=>records.map(x=>({...x}));Storage.activatePackage=async id=>{const r=records.find(x=>x.id===id);if(!valid(r))throw new Error('invalid package');activeId=id;return r;};Storage.deletePackage=async id=>{if(activeId===id)throw new Error('不能直接刪除目前啟用的資料包');records=records.filter(x=>x.id!==id);};
+const good=(id,seq)=>({id,packageId:'TW',version:id,verified:true,payloads:[{path:`${id}.json`,bytes:1}],installSequence:seq,installedAt:new Date(seq).toISOString()});
+function reset(rows=[],pointer=null){records=rows;activeId=pointer;reconcileCalls=0;}
+await check('Startup inspection reconciles an active pointer to a valid installed package',async()=>{reset([good('v1',1),good('v2',2)],'missing');const pm=new PackageManager();const found=await pm.inspect();assert.equal(found.id,'v2');assert.equal(activeId,'v2');assert.equal(reconcileCalls,1);});
+await check('A valid but older active package remains active after restart recovery',async()=>{reset([good('v1',1),good('v2',2)],'v1');const pm=new PackageManager();assert.equal((await pm.inspect()).id,'v1');assert.equal(activeId,'v1');});
+await check('Invalid active record falls back to the newest verified package',async()=>{reset([{id:'bad',verified:false,payloads:[],installSequence:9},good('good',4)],'bad');const pm=new PackageManager();assert.equal((await pm.inspect()).id,'good');assert.equal(activeId,'good');});
+await check('No valid package produces a clean empty state',async()=>{reset([{id:'bad',verified:false,payloads:[]}],'bad');const pm=new PackageManager();assert.equal(await pm.inspect(),null);assert.equal(pm.current,null);assert.equal(activeId,null);});
+await check('Repeated startup recovery is idempotent',async()=>{reset([good('v1',1),good('v2',2)],'missing');const pm=new PackageManager();assert.equal((await pm.inspect()).id,'v2');assert.equal((await pm.inspect()).id,'v2');assert.equal(activeId,'v2');});
+await check('Package deletion checks active pointer in the same IndexedDB read-write transaction',()=>{const s=fs.readFileSync(path.join(root,'js/storage.js'),'utf8');assert.match(s,/transaction\(\['packages','meta'\],'readwrite'\)/);assert.match(s,/async deletePackage\(id\)/);assert.match(s,/r\.result\?\.value===id/);assert.doesNotMatch(s,/async deletePackage\(id\)\{const active=await this\.getActivePackage/);});
+await check('Startup reconciliation reads packages and active pointer in one transaction',()=>{const s=fs.readFileSync(path.join(root,'js/storage.js'),'utf8');assert.match(s,/async reconcileActivePackage\(\)/);assert.match(s,/const t=db\.transaction\(\['packages','meta'\],'readwrite'\)/);assert.match(s,/const all=p\.getAll\(\)/);assert.match(s,/const pointer=m\.get\('activePackageId'\)/);assert.match(s,/m\.delete\('activePackageId'\)/);});
+await check('Package manager runs reconciliation before trusting startup state',()=>{const s=fs.readFileSync(path.join(root,'js/package-manager.js'),'utf8');assert.match(s,/Storage\.reconcileActivePackage\(\)/);assert.ok(s.indexOf('Storage.reconcileActivePackage()')<s.indexOf('Storage.getActivePackage()'));});
+await check('Current release and service worker cache align to Batch 48',()=>{assert.equal(fs.readFileSync(path.join(root,'VERSION'),'utf8').trim(),'1.1.0-b60');assert.match(fs.readFileSync(path.join(root,'sw.js'),'utf8'),/ai-gps-release-v1\.1\.0-b60/);});
+await check('No valid active pointer is created from unverified or empty-payload data',async()=>{reset([{id:'empty',verified:true,payloads:[],installSequence:7}],'empty');const pm=new PackageManager();assert.equal(await pm.inspect(),null);assert.equal(activeId,null);});
+for(const k of Object.keys(original))Storage[k]=original[k];
+const report={batch:48,version:'1.1.0-b48',suite:'offline-startup-recovery-and-atomic-deletion',scope:'Node.js PackageManager tests with mocked storage plus static IndexedDB transaction contract checks; browser IndexedDB fault injection not run',total:results.length,passed:results.filter(x=>x.status==='PASS').length,failed:results.filter(x=>x.status==='FAIL').length,results};
+fs.writeFileSync(path.join(root,'tests/batch48-offline-startup-recovery-report.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(report.failed)process.exitCode=1;

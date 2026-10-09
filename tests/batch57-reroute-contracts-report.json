@@ -1,0 +1,17 @@
+{
+  "suite": "batch57-reroute-contracts",
+  "version": "1.1.0-b57",
+  "total": 13,
+  "passed": 13,
+  "failed": 0,
+  "coverage": [
+    "reroute payload validation",
+    "destination and coordinate validation",
+    "route shape, distance, and ETA validation",
+    "GPS readiness gating",
+    "invalid asynchronous result rejection",
+    "stale request cancellation after navigation stop",
+    "successful route commit and offline destination metadata preservation",
+    "release cache version alignment"
+  ]
+}

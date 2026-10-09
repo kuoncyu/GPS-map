@@ -1,0 +1,54 @@
+{
+  "batch": 37,
+  "suite": "user-flow-contract-offline-safety",
+  "scope": "Source-level contract checks only. No real browser engine, rendered UI, or physical device was launched.",
+  "total": 11,
+  "passed": 11,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Search button and Enter key both execute offline search",
+      "status": "PASS"
+    },
+    {
+      "name": "Selecting search result sets destination and map pin",
+      "status": "PASS"
+    },
+    {
+      "name": "Route UI has planning, alternative and clear handlers",
+      "status": "PASS"
+    },
+    {
+      "name": "Start navigation delegates to engine and starts GPS",
+      "status": "PASS"
+    },
+    {
+      "name": "Stop navigation stops engine and GPS",
+      "status": "PASS"
+    },
+    {
+      "name": "Offline package download refuses to fetch while offline",
+      "status": "PASS"
+    },
+    {
+      "name": "Network state reacts to online and offline events",
+      "status": "PASS"
+    },
+    {
+      "name": "Service worker uses current release cache and offline fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "Every service-worker precache asset exists",
+      "status": "PASS"
+    },
+    {
+      "name": "All key flow controls exist exactly once",
+      "status": "PASS"
+    },
+    {
+      "name": "Destination selection event and service-worker registration are wired",
+      "status": "PASS"
+    }
+  ]
+}

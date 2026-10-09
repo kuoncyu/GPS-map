@@ -1,0 +1,9 @@
+AI GPS Batch 54 verification
+Release: 1.1.0-b54
+
+Dedicated navigation-start preflight tests: 12/12 passed.
+Regression scripts: 21 passed, 0 failed (all non-browser-smoke tests/*.mjs scripts).
+Static QA: 45 JavaScript files, 66 JSON files, 16 required assets, 0 failures.
+Offline pipeline: PASS; 3 source files, 7 nodes, 14 edges, 2 POIs.
+Chromium smoke: BLOCKED by execution environment localhost policy; 0 passed, 0 failed. Not counted as a pass.
+Physical GPS/device navigation: not tested.

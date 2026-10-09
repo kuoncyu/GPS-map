@@ -1,0 +1,8 @@
+AI GPS Batch 59 pipeline summary
+Version: 1.1.0-b59
+Routing graph readiness tests: 14 passed / 14 total
+Node.js regression: 26 test files passed, 0 failed (2 browser-specific scripts excluded from the Node regression loop)
+Static QA: 45 JS, 78 JSON, 16 required assets, 0 failures
+Offline pipeline: 3 files, 7 nodes, 14 edges, 2 POIs (PASS)
+Chromium local smoke: BLOCKED by organization policy (0 passed, 0 failed)
+Physical GPS/device navigation acceptance: NOT TESTED

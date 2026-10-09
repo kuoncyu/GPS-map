@@ -1,0 +1,83 @@
+{
+  "batch": 41,
+  "suite": "gps-provider-lifecycle",
+  "executedAt": "2026-10-09T17:17:55.086Z",
+  "scope": "Node.js tests with simulated Geolocation API; no physical GPS hardware",
+  "total": 9,
+  "passed": 9,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Provider advertises GPS capabilities",
+      "status": "PASS",
+      "detail": {
+        "id": "browser-geolocation",
+        "kind": "gps",
+        "isLive": true,
+        "offlineCapable": true
+      }
+    },
+    {
+      "name": "Start requests browser watch with configured options",
+      "status": "PASS",
+      "detail": {
+        "watchCalls": 1,
+        "watchOptions": {
+          "enableHighAccuracy": true,
+          "maximumAge": 1000,
+          "timeout": 3000,
+          "maxFixAgeMs": 30000
+        }
+      }
+    },
+    {
+      "name": "Repeated start does not create duplicate watch",
+      "status": "PASS",
+      "detail": {
+        "watchCalls": 1
+      }
+    },
+    {
+      "name": "Valid coordinates update location and unit conversions",
+      "status": "PASS",
+      "detail": {
+        "location": {
+          "lat": 25.03,
+          "lng": 121.56
+        },
+        "speedKmh": 36,
+        "status": "LIVE_GPS"
+      }
+    },
+    {
+      "name": "Invalid coordinates are rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Permission, unavailable-position and timeout errors have explicit status",
+      "status": "PASS"
+    },
+    {
+      "name": "A later valid fix recovers live GPS state after signal error",
+      "status": "PASS",
+      "detail": {
+        "status": "LIVE_GPS",
+        "location": {
+          "lat": 24.99,
+          "lng": 121.3
+        }
+      }
+    },
+    {
+      "name": "Stop clears active watch and marks provider not live",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing geolocation is reported unavailable",
+      "status": "PASS",
+      "detail": {
+        "status": "UNAVAILABLE"
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "batch": 57,
+  "version": "1.1.0-b57",
+  "focus": "Navigation reroute commit contracts and async lifecycle consistency",
+  "batchTests": {"total": 13, "passed": 13, "failed": 0},
+  "regressionSuites": {"total": 24, "passed": 24, "failed": 0},
+  "browserSmokeSuitesSkipped": 2,
+  "staticQA": {"javascriptFiles": 45, "jsonFiles": 74, "requiredAssets": 16, "failed": 0},
+  "offlinePipeline": {"status": "PASS", "files": 3, "nodes": 7, "edges": 14, "pois": 2},
+  "browserSmoke": {"status": "BLOCKED", "passed": 0, "failed": 0, "detail": "Chromium could not navigate to localhost due to organization execution policy"},
+  "physicalGps": "NOT TESTED",
+  "knownLimits": ["Road and POI data are demonstration data, not a nationwide commercial map", "Real browser IndexedDB and Service Worker acceptance remains outstanding", "Physical device GPS and real-road navigation remain outstanding"]
+}

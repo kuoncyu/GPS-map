@@ -1,0 +1,7 @@
+BATCH56_PIPELINE_OK
+Focused GPS/navigation lifecycle suite: 12/12 passed.
+Regression: 23 executable Node.js suites passed, 0 failed (browser-smoke execution is reported separately as blocked).
+Static QA: 45 JavaScript files, 72 JSON files, 16 required assets, 0 failures.
+Offline data pipeline: 3 files, 7 nodes, 14 edges, 2 POIs.
+Chromium smoke: BLOCKED by organization policy when navigating to localhost; 0 passed, 0 failed.
+Physical GPS/device acceptance: NOT TESTED.

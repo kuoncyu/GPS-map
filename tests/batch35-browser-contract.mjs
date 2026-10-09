@@ -1,0 +1,27 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import { fileURLToPath } from 'node:url';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const sw = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
+const app = fs.readFileSync(path.join(root, 'js/app.js'), 'utf8');
+const results = [];
+function check(name, fn) { try { fn(); results.push({name, status:'PASS'}); } catch (e) { results.push({name, status:'FAIL', error:e.message}); } }
+check('HTML document and app root', () => { assert.match(html, /<!doctype html/i); assert.match(html, /id="app"/); assert.match(html, /<script type="module" src="js\/app\.js"/); });
+check('Mobile viewport', () => assert.match(html, /name="viewport"[^>]*width=device-width/i));
+check('Search destination controls', () => { for (const id of ['searchInput','searchBtn','searchResults','searchStatus']) assert.ok(html.includes(`id="${id}"`), `missing ${id}`); });
+check('Route planning controls', () => { for (const id of ['routeBtn','alternativeBtn','previewRouteBtn','routeSummary','startNavBtn','stopNavBtn','clearRouteBtn']) assert.ok(html.includes(`id="${id}"`), `missing ${id}`); });
+check('Navigation guidance indicators', () => { for (const id of ['gpsStatus','distance','time','eta','nextAction','nextActionDistance']) assert.ok(html.includes(`id="${id}"`), `missing ${id}`); });
+check('Offline package controls', () => { for (const id of ['packageState','openDownloads','downloadCenter','downloadBtn','downloadProgress']) assert.ok(html.includes(`id="${id}"`), `missing ${id}`); });
+check('App references main flow controls', () => { for (const id of ['searchBtn','routeBtn','startNavBtn','stopNavBtn']) assert.ok(app.includes(id), `app.js does not reference ${id}`); });
+check('Service worker version matches release', () => { assert.match(sw, /ai-gps-release-v1\.1\.0-b60/); assert.match(fs.readFileSync(path.join(root,'VERSION'),'utf8'), /1\.1\.0-b60/); });
+check('Service worker offline fallback', () => { assert.match(sw, /caches\.match\('\.\/index\.html'\)/); assert.match(sw, /addAll\(ASSETS\)/); });
+check('All precache assets exist', () => { const m = sw.match(/const ASSETS=\[([\s\S]*?)\];/); assert.ok(m, 'ASSETS list not found'); const assets = [...m[1].matchAll(/'([^']+)'/g)].map(x=>x[1]).filter(x=>x!=='./'); const missing = assets.filter(a=>!fs.existsSync(path.join(root,a.replace(/^\.\//,'')))); assert.deepEqual(missing, [], `missing assets: ${missing.join(', ')}`); });
+check('Required manifest and offline stylesheet', () => { assert.ok(fs.existsSync(path.join(root,'manifest.json')) || fs.existsSync(path.join(root,'data/manifest.json'))); assert.ok(fs.existsSync(path.join(root,'css/offline.css'))); });
+check('No duplicate IDs in HTML', () => { const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]); const duplicates=ids.filter((id,i)=>ids.indexOf(id)!==i); assert.deepEqual([...new Set(duplicates)], []); });
+check('Navigation modules exist', () => { for (const f of ['js/navigation.js','js/routing.js','js/search.js','js/offline-manager.js']) assert.ok(fs.existsSync(path.join(root,f)), `missing ${f}`); });
+const report = {batch:35, suite:'browser-contract-static-smoke', executedAt:new Date().toISOString(), note:'Static contract checks only; no real browser engine or device interaction is exercised.', total:results.length, passed:results.filter(x=>x.status==='PASS').length, failed:results.filter(x=>x.status==='FAIL').length, results};
+fs.writeFileSync(path.join(root,'tests/batch35-browser-contract-report.json'), JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report,null,2));
+if(report.failed) process.exitCode=1;

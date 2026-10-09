@@ -1,0 +1,65 @@
+{
+  "suite": "batch59-routing-data-readiness",
+  "version": "1.1.0-b60",
+  "total": 14,
+  "passed": 14,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Valid routing graph passes structural validation",
+      "status": "PASS"
+    },
+    {
+      "name": "Duplicate node identifiers are rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Invalid node latitude is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Invalid node longitude is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Edges referring to missing nodes are rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Self-loop edge is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Zero edge distance is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Non-finite edge duration is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Router rejects malformed origin before loading graph",
+      "status": "PASS"
+    },
+    {
+      "name": "Router rejects malformed destination before loading graph",
+      "status": "PASS"
+    },
+    {
+      "name": "Router rejects invalid waypoint coordinates",
+      "status": "PASS"
+    },
+    {
+      "name": "Malformed graph fetched from offline route source fails closed",
+      "status": "PASS"
+    },
+    {
+      "name": "Bundled offline route graph satisfies routing validation",
+      "status": "PASS"
+    },
+    {
+      "name": "Release version and service-worker cache are aligned",
+      "status": "PASS"
+    }
+  ]
+}

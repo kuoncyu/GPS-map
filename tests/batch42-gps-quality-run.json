@@ -1,0 +1,34 @@
+{
+  "batch": 42,
+  "suite": "gps-quality-freshness",
+  "scope": "Pure helper tests plus source integration contract; simulated timestamps only, no physical GPS",
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Accuracy bands classify good, fair, poor and unknown",
+      "status": "PASS"
+    },
+    {
+      "name": "Freshness accepts current fixes and rejects expired or invalid timestamps",
+      "status": "PASS"
+    },
+    {
+      "name": "Freshness rejects timestamps implausibly far in the future",
+      "status": "PASS"
+    },
+    {
+      "name": "Fix age is non-negative and handles invalid inputs",
+      "status": "PASS"
+    },
+    {
+      "name": "Provider integrates freshness and accuracy metadata",
+      "status": "PASS"
+    },
+    {
+      "name": "Service worker precaches GPS quality module and release versions align",
+      "status": "PASS"
+    }
+  ]
+}

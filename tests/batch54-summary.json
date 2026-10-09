@@ -1,0 +1,12 @@
+{
+  "batch": 54,
+  "version": "1.1.0-b54",
+  "scope": "navigation start preflight and route/destination/package identity validation",
+  "dedicated": {"total": 12, "passed": 12, "failed": 0},
+  "regressionSuites": {"total": 21, "passed": 21, "failed": 0, "note": "All non-browser-smoke test scripts under tests/*.mjs passed, including static QA and offline pipeline."},
+  "staticQA": {"javascriptFiles": 45, "jsonFiles": 66, "requiredAssets": 16, "failed": 0},
+  "offlinePipeline": {"status": "PASS", "sourceFiles": 3, "nodes": 7, "edges": 14, "pois": 2},
+  "browserSmoke": {"status": "BLOCKED", "passed": 0, "failed": 0, "note": "Chromium could not access localhost due to execution environment policy."},
+  "physicalGpsTest": "NOT RUN",
+  "limitations": ["Demonstration road/POI data only; not a nationwide production map dataset.", "Node tests do not replace real-browser IndexedDB/Service Worker and physical-device GPS acceptance."]
+}

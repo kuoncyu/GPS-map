@@ -1,0 +1,51 @@
+{
+  "batch": 48,
+  "version": "1.1.0-b48",
+  "suite": "offline-startup-recovery-and-atomic-deletion",
+  "scope": "Node.js PackageManager tests with mocked storage plus static IndexedDB transaction contract checks; browser IndexedDB fault injection not run",
+  "total": 10,
+  "passed": 10,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Startup inspection reconciles an active pointer to a valid installed package",
+      "status": "PASS"
+    },
+    {
+      "name": "A valid but older active package remains active after restart recovery",
+      "status": "PASS"
+    },
+    {
+      "name": "Invalid active record falls back to the newest verified package",
+      "status": "PASS"
+    },
+    {
+      "name": "No valid package produces a clean empty state",
+      "status": "PASS"
+    },
+    {
+      "name": "Repeated startup recovery is idempotent",
+      "status": "PASS"
+    },
+    {
+      "name": "Package deletion checks active pointer in the same IndexedDB read-write transaction",
+      "status": "PASS"
+    },
+    {
+      "name": "Startup reconciliation reads packages and active pointer in one transaction",
+      "status": "PASS"
+    },
+    {
+      "name": "Package manager runs reconciliation before trusting startup state",
+      "status": "PASS"
+    },
+    {
+      "name": "Current release and service worker cache align to Batch 48",
+      "status": "PASS"
+    },
+    {
+      "name": "No valid active pointer is created from unverified or empty-payload data",
+      "status": "PASS"
+    }
+  ]
+}

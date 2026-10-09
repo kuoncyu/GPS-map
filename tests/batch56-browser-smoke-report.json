@@ -1,0 +1,19 @@
+{
+  "batch": 56,
+  "version": "1.1.0-b56",
+  "suite": "chromium-cdp-browser-smoke",
+  "targetMode": "local-static-server",
+  "chromiumPath": "/usr/bin/chromium",
+  "scope": "Headless Chromium through Chrome DevTools Protocol; no mobile device or GPS hardware",
+  "total": 1,
+  "passed": 0,
+  "failed": 0,
+  "blocked": 1,
+  "results": [
+    {
+      "name": "Chromium navigation to local app",
+      "status": "BLOCKED",
+      "reason": "The environment policy blocked navigation to localhost before the application document loaded; UI assertions were not run."
+    }
+  ]
+}

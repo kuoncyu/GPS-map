@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import {routeToDestination} from '../js/routing.js';
+import {getState,setState} from '../js/state.js';
+const results=[];
+async function check(name,fn){try{await fn();results.push({name,status:'PASS'});}catch(e){results.push({name,status:'FAIL',error:e?.stack||e?.message||String(e)});}}
+const route={id:'r1',points:[{lat:25,lng:121},{lat:25.01,lng:121.01}],distance:1500,seconds:180,roads:['示範道路'],nodeIds:['a','b']};
+const dest=(id='poi-a',lat=25.01,lng=121.01,record='pkg-a')=>({id,name:id,lat,lng,_offlinePackageRecordId:record,_offlinePackageId:'TW-DEMO',_offlinePackageVersion:'v1'});
+function reset(destination=null){setState({currentLocation:{lat:25,lng:121},destination,waypoints:[],route:null,alternativeRoutes:[],remainingDistance:null,remainingTime:null,navigationStatus:'READY'});}
+await check('Valid destination creates route and preserves selected destination',async()=>{const d=dest();reset(d);const router={graphPackageId:'pkg-a',async calculate(){return {...route}}};const r=await routeToDestination(router,d);assert.equal(r.id,'r1');assert.equal(getState().route.id,'r1');assert.equal(getState().destination.id,'poi-a');assert.equal(getState().navigationStatus,'ROUTE_READY');});
+await check('Invalid latitude is rejected before routing',async()=>{const d=dest('bad',91,121);reset(d);let calls=0;await assert.rejects(()=>routeToDestination({async calculate(){calls++;return route}},d),/座標無效/);assert.equal(calls,0);});
+await check('Invalid longitude is rejected before routing',async()=>{const d=dest('bad',25,181);reset(d);await assert.rejects(()=>routeToDestination({async calculate(){return route}},d),/座標無效/);});
+await check('Old package search result is rejected',async()=>{const d=dest();reset(d);await assert.rejects(()=>routeToDestination({graphPackageId:'pkg-b',async calculate(){return route}},d),/資料包已變更/);assert.equal(getState().route,null);});
+await check('Malformed route result is rejected',async()=>{const d=dest();reset(d);await assert.rejects(()=>routeToDestination({graphPackageId:'pkg-a',async calculate(){return {id:'bad',points:[],distance:NaN,seconds:0}}},d),/資料不完整/);assert.equal(getState().route,null);});
+await check('Destination changed during async routing; stale route is discarded',async()=>{const d=dest();reset(d);let resolve;const pending=new Promise(r=>resolve=r);const work=routeToDestination({graphPackageId:'pkg-a',calculate(){return pending}},d);await Promise.resolve();setState({destination:dest('poi-b',25.02,121.02,'pkg-a')});resolve({...route,id:'stale'});await assert.rejects(()=>work,/目的地已變更/);assert.equal(getState().route,null);assert.equal(getState().destination.id,'poi-b');});
+await check('Route failure leaves existing route state untouched',async()=>{const d=dest();reset(d);const existing={...route,id:'existing'};setState({route:existing});await assert.rejects(()=>routeToDestination({graphPackageId:'pkg-a',async calculate(){throw new Error('offline failure')}},d),/offline failure/);assert.equal(getState().route.id,'existing');});
+await check('Missing destination is rejected',async()=>{reset(null);await assert.rejects(()=>routeToDestination({async calculate(){return route}},null),/尚未選擇目的地/);});
+await check('Empty active package metadata cannot bypass package check',async()=>{const d=dest();reset(d);await assert.rejects(()=>routeToDestination({graphPackageId:null,async calculate(){return route}},d),/資料包已變更/);});
+await check('Newly selected matching destination remains valid',async()=>{const d=dest();reset(d);const router={graphPackageId:'pkg-a',async calculate(){return {...route,id:'fresh'}}};const r=await routeToDestination(router,d);assert.equal(getState().route.id,r.id);});
+await check('Destination coordinate strings are normalized for validation',async()=>{const d={...dest(),lat:'25.01',lng:'121.01'};reset(d);const r=await routeToDestination({graphPackageId:'pkg-a',async calculate(){return {...route}}},d);assert.equal(r.id,'r1');});
+await check('Concurrent destination change before request starts is rejected',async()=>{const old=dest();reset(dest('poi-b',25.02,121.02,'pkg-a'));await assert.rejects(()=>routeToDestination({async calculate(){return route}},old),/目的地已變更/);});
+console.log(JSON.stringify({suite:'batch53-end-to-end-destination-routing',total:results.length,passed:results.filter(x=>x.status==='PASS').length,failed:results.filter(x=>x.status==='FAIL').length,results},null,2));
+if(results.some(x=>x.status==='FAIL'))process.exitCode=1;

@@ -1,0 +1,42 @@
+{
+  "batch": 44,
+  "suite": "navigation-gps-loss-safety",
+  "scope": "Node.js state/module integration with mocked router and synthetic coordinates; no physical GPS hardware or browser UI",
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Starting with reliable GPS begins navigation",
+      "status": "PASS"
+    },
+    {
+      "name": "GPS stale transitions active navigation into signal-lost state",
+      "status": "PASS"
+    },
+    {
+      "name": "Location updates while GPS is stale do not change route metrics or trigger reroute",
+      "status": "PASS"
+    },
+    {
+      "name": "GPS error status also blocks live navigation updates",
+      "status": "PASS"
+    },
+    {
+      "name": "Fresh GPS fix resumes navigation and recalculates from current position",
+      "status": "PASS"
+    },
+    {
+      "name": "GPS failure cannot trigger off-route recalculation",
+      "status": "PASS"
+    },
+    {
+      "name": "Stopping navigation while GPS is lost returns to route-ready and does not auto-resume",
+      "status": "PASS"
+    },
+    {
+      "name": "Navigation module explicitly guards unreliable GPS before route metrics and rerouting",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "batch": 38,
+  "suite": "offline-routing-runtime-integration",
+  "scope": "Node.js module integration with mocked fetch over bundled offline JSON; no real browser or GPS hardware.",
+  "browserAutomation": {
+    "playwright": false,
+    "puppeteer": false,
+    "note": "Neither Playwright nor Puppeteer is installed in this environment."
+  },
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Loads bundled offline graph and demo traffic snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "Calculates a route between valid graph endpoints",
+      "status": "PASS"
+    },
+    {
+      "name": "Honors avoid-highway constraint with a feasible alternative",
+      "status": "PASS"
+    },
+    {
+      "name": "Honors toll avoidance",
+      "status": "PASS"
+    },
+    {
+      "name": "Waypoint is included in calculated path",
+      "status": "PASS"
+    },
+    {
+      "name": "routeToDestination updates route-ready application state",
+      "status": "PASS"
+    },
+    {
+      "name": "Rejects route request when destination is missing",
+      "status": "PASS"
+    },
+    {
+      "name": "Reports impossible route when every edge is blocked",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "batch": 54,
+  "version": "1.1.0-b54",
+  "suite": "navigation-start-preflight-and-route-identity",
+  "total": 12,
+  "passed": 12,
+  "failed": 0,
+  "checks": [
+    "valid destination and route",
+    "missing/invalid destination",
+    "missing/incomplete route",
+    "stale destination identity",
+    "offline package record mismatch",
+    "invalid route point coordinates",
+    "navigation transition matrix"
+  ]
+}

@@ -1,0 +1,13 @@
+BATCH 46 OFFLINE PACKAGE PIPELINE
+- Release: 1.1.0-b46
+- Manifest payload files: 7
+- Total payload size: 7,874 bytes
+- Per-file byte length and SHA-256: verified against current project data files
+- Manifest file-list SHA-256: verified
+- Empty placeholder/demo hashes: rejected by validator
+- Existing stable package is not replaced until all payload checks pass
+- Batch 46 integrity suite: 12 passed, 0 failed
+- Static QA: 45 JS, 53 JSON, 16 required assets, 0 failures
+- Batch 18 graph pipeline: 3 files, 7 nodes, 14 edges, 2 POIs; passed
+- Chromium smoke: BLOCKED by environment localhost policy; not counted as pass
+- Real device/GPS validation: not run

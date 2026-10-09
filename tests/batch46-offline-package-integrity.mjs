@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+import {validatePackageManifest,verifyPackageFiles,sha256Bytes} from '../js/offline-package-integrity.js';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const results=[];
+async function check(name,fn){try{await fn();results.push({name,status:'PASS'});}catch(e){results.push({name,status:'FAIL',error:e?.stack||e?.message||String(e)});}}
+const bytes=new TextEncoder().encode('{"offline":true,"nodes":3}');
+const hash=crypto.createHash('sha256').update(bytes).digest('hex');
+function manifestFor(data=bytes){const h=crypto.createHash('sha256').update(data).digest('hex');const files=[{path:'./data/test.json',size:data.byteLength,sha256:h}];return {packageId:'TEST-PACK',version:'1.0.0',region:'測試區',files,sizeBytes:data.byteLength,sha256:crypto.createHash('sha256').update(JSON.stringify(files)).digest('hex')};}
+const responseFor=data=>async()=>({ok:true,status:200,arrayBuffer:async()=>data.buffer.slice(data.byteOffset,data.byteOffset+data.byteLength)});
+await check('Accepts a structurally valid manifest and a real SHA-256 file record',()=>{assert.equal(validatePackageManifest(manifestFor()).valid,true);});
+await check('Rejects demo placeholders, zero-size files and invalid hashes',()=>{const m={...manifestFor(),files:[{path:'maps/tpe.mbtiles',size:0,sha256:'demo'}]};const r=validatePackageManifest(m);assert.equal(r.valid,false);assert.ok(r.errors.some(x=>x.includes('size')));assert.ok(r.errors.some(x=>x.includes('sha256')));});
+await check('Rejects a declared total size that differs from the sum of payload sizes',()=>{const m={...manifestFor(),sizeBytes:bytes.byteLength+1};const r=validatePackageManifest(m);assert.equal(r.valid,false);assert.ok(r.errors.some(x=>x.includes('sizeBytes')));});
+await check('Rejects absolute paths, parent traversal and duplicate file paths',()=>{const m={...manifestFor(),files:[{path:'../secret',size:bytes.length,sha256:hash},{path:'../secret',size:bytes.length,sha256:hash}]};const r=validatePackageManifest(m);assert.equal(r.valid,false);assert.ok(r.errors.some(x=>x.includes('安全的相對路徑')));assert.ok(r.errors.some(x=>x.includes('重複路徑')));});
+await check('Downloads and verifies each payload by exact size and SHA-256',async()=>{const m=manifestFor();const r=await verifyPackageFiles(m,{fetchImpl:responseFor(bytes)});assert.equal(r.verified,true);assert.equal(r.payloads.length,1);assert.equal(r.payloads[0].sha256,hash);assert.equal(r.downloaded,bytes.byteLength);});
+await check('Rejects an altered manifest file list using aggregate SHA-256',async()=>{const m=manifestFor();m.files[0].path='./data/changed.json';await assert.rejects(()=>verifyPackageFiles(m,{fetchImpl:responseFor(bytes)}),/清單 SHA-256 不符/);});
+await check('Rejects payload with incorrect byte length',async()=>{const m=manifestFor();await assert.rejects(()=>verifyPackageFiles(m,{fetchImpl:responseFor(new TextEncoder().encode('too short'))}),/檔案大小不符/);});
+await check('Rejects payload with incorrect SHA-256 even if its byte length matches',async()=>{const m=manifestFor();const bad=new TextEncoder().encode('x'.repeat(bytes.byteLength));await assert.rejects(()=>verifyPackageFiles(m,{fetchImpl:responseFor(bad)}),/SHA-256 驗證失敗/);});
+await check('Rejects missing HTTP resources without marking package verified',async()=>{const m=manifestFor();await assert.rejects(()=>verifyPackageFiles(m,{fetchImpl:async()=>({ok:false,status:404})}),/HTTP 404/);});
+await check('Installer commits only after file verification and keeps prior stable package on failure',()=>{const pm=fs.readFileSync(path.join(root,'js/package-manager.js'),'utf8');assert.match(pm,/await verifyPackageFiles\(manifest/);assert.ok(pm.indexOf('await verifyPackageFiles(manifest')<pm.indexOf('await Storage.putPackageAndActivate(record'));assert.match(pm,/Storage\.putPackageAndActivate\(record/);});
+await check('Manifest describes real, non-empty local data files with matching SHA-256 and aggregate hash',async()=>{const m=JSON.parse(fs.readFileSync(path.join(root,'data/package-manifest.json'),'utf8'));assert.equal(validatePackageManifest(m).valid,true);for(const f of m.files){const data=fs.readFileSync(path.join(root,f.path.replace(/^\.\//,'')));assert.equal(data.length,f.size,`${f.path} size`);assert.equal(crypto.createHash('sha256').update(data).digest('hex'),f.sha256,`${f.path} hash`);}assert.equal(crypto.createHash('sha256').update(JSON.stringify(m.files)).digest('hex'),m.sha256);});
+await check('Release cache and version identifiers are aligned to Batch 47',()=>{assert.equal(fs.readFileSync(path.join(root,'VERSION'),'utf8').trim(),'1.1.0-b60');assert.match(fs.readFileSync(path.join(root,'sw.js'),'utf8'),/ai-gps-release-v1\.1\.0-b60/);assert.match(fs.readFileSync(path.join(root,'sw.js'),'utf8'),/\.\/js\/offline-package-integrity\.js/);});
+const report={batch:46,suite:'offline-package-manifest-and-payload-integrity',scope:'Node.js verification tests with deterministic mocked HTTP payloads; no browser UI, real network, or physical GPS',total:results.length,passed:results.filter(x=>x.status==='PASS').length,failed:results.filter(x=>x.status==='FAIL').length,results};
+fs.writeFileSync(path.join(root,'tests/batch46-offline-package-integrity-report.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(report.failed)process.exitCode=1;

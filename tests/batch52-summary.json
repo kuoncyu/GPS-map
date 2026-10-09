@@ -1,0 +1,21 @@
+{
+  "batch": 52,
+  "version": "1.1.0-b52",
+  "focus": "offline POI search and route package-version consistency",
+  "dedicatedSuite": "tests/batch52-offline-search-package-consistency.mjs",
+  "dedicatedPassed": 12,
+  "dedicatedFailed": 0,
+  "regressionSuites": 17,
+  "regressionChecksPassed": 158,
+  "regressionChecksFailed": 0,
+  "staticQa": {
+    "javascriptFiles": 45,
+    "jsonFiles": 65,
+    "requiredAssets": 16,
+    "failures": 0
+  },
+  "offlinePipeline": "passed: 3 source files, 7 nodes, 14 edges, 2 POIs",
+  "chromiumSmoke": "BLOCKED: environment policy blocks localhost; not counted as passed",
+  "realBrowserIndexedDBValidation": "not run",
+  "physicalDeviceValidation": "not run"
+}

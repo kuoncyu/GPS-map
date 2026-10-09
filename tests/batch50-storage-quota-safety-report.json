@@ -1,0 +1,43 @@
+{
+  "batch": 50,
+  "version": "1.1.0-b50",
+  "suite": "offline-storage-quota-safety",
+  "scope": "Node.js tests with mocked storage/network plus static quota-preflight and release-cache contracts; real browser quota behavior not exercised",
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Insufficient estimated quota rejects before network fetch",
+      "status": "PASS"
+    },
+    {
+      "name": "Quota preflight is skipped when browser estimate API is unavailable",
+      "status": "PASS"
+    },
+    {
+      "name": "QuotaExceededError from persistent commit is reported with actionable message",
+      "status": "PASS"
+    },
+    {
+      "name": "Storage estimate returns a safe unsupported result when API is absent",
+      "status": "PASS"
+    },
+    {
+      "name": "Install performs quota preflight before downloading payloads",
+      "status": "PASS"
+    },
+    {
+      "name": "Quota failures preserve the current active package and do not commit new data",
+      "status": "PASS"
+    },
+    {
+      "name": "Service worker and VERSION use Batch 50 release id",
+      "status": "PASS"
+    },
+    {
+      "name": "Current smoke test looks for the Batch 51 cache",
+      "status": "PASS"
+    }
+  ]
+}

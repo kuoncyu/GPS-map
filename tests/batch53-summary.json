@@ -1,0 +1,40 @@
+{
+  "batch": 53,
+  "version": "1.1.0-b53",
+  "suite": "destination-to-route end-to-end consistency",
+  "dedicated": {
+    "total": 12,
+    "passed": 12,
+    "failed": 0
+  },
+  "regression": {
+    "total": 170,
+    "passed": 170,
+    "failed": 0,
+    "suiteCount": 18
+  },
+  "staticQA": {
+    "javascriptFiles": 45,
+    "jsonFiles": 65,
+    "requiredAssets": 16,
+    "failed": 0
+  },
+  "offlinePipeline": {
+    "status": "PASS",
+    "files": 3,
+    "nodes": 7,
+    "edges": 14,
+    "pois": 2
+  },
+  "browserSmoke": {
+    "status": "BLOCKED",
+    "passed": 0,
+    "failed": 1,
+    "note": "Chromium smoke harness setup failed in this environment ([object ErrorEvent]); no browser feature pass is claimed."
+  },
+  "physicalGpsTest": "NOT RUN",
+  "limitations": [
+    "Demonstration road/POI data only; not a nationwide production map dataset.",
+    "Automated tests use injected/mocked adapters and do not replace real-browser/device acceptance tests."
+  ]
+}

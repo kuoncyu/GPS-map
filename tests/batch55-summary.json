@@ -1,0 +1,11 @@
+{
+  "batch": 55,
+  "version": "1.1.0-b55",
+  "focus": "navigation flow consistency and stale async route result protection",
+  "batchTests": {"total": 8, "passed": 8, "failed": 0},
+  "selectedRegression": {"suites": 16, "total": 147, "passed": 147, "failed": 0},
+  "staticQA": {"javascriptFiles": 45, "jsonFiles": 68, "requiredAssets": 16, "failed": 0},
+  "offlinePipeline": {"status": "PASS", "files": 3, "nodes": 7, "edges": 14, "pois": 2},
+  "browserSmoke": "NOT VERIFIED in this batch; previous Chromium smoke test was blocked by localhost policy",
+  "physicalGps": "NOT TESTED"
+}

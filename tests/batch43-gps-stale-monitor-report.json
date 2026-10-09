@@ -1,0 +1,49 @@
+{
+  "batch": 43,
+  "suite": "gps-stale-monitor-lifecycle",
+  "scope": "Node.js with simulated Geolocation API and injected deterministic scheduler; no physical GPS/browser permission UI",
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "results": [
+    {
+      "name": "GPS start arms one stale monitor and one geolocation watch",
+      "status": "PASS",
+      "detail": {
+        "watchCount": 1,
+        "intervalMs": 1000
+      }
+    },
+    {
+      "name": "Repeated start does not duplicate stale monitor",
+      "status": "PASS"
+    },
+    {
+      "name": "Fresh fix keeps live navigation assistance enabled",
+      "status": "PASS"
+    },
+    {
+      "name": "Scheduled stale check degrades live state after fix expires",
+      "status": "PASS"
+    },
+    {
+      "name": "Repeated stale ticks do not repeatedly re-emit stale transition",
+      "status": "PASS"
+    },
+    {
+      "name": "New valid fix recovers from stale status",
+      "status": "PASS"
+    },
+    {
+      "name": "Stop cancels timer and browser watch and disables live assistance",
+      "status": "PASS"
+    },
+    {
+      "name": "Monitor scheduler absence is handled without throwing",
+      "status": "PASS",
+      "detail": {
+        "monitor": "not available; provider remains manually controllable"
+      }
+    }
+  ]
+}

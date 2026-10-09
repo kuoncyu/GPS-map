@@ -1,0 +1,16 @@
+{
+  "batch": 50,
+  "version": "1.1.0-b50",
+  "focus": "offline storage quota preflight and install failure safety",
+  "dedicatedSuite": "tests/batch50-storage-quota-safety.mjs",
+  "dedicatedPassed": 8,
+  "dedicatedFailed": 0,
+  "regressionSuites": 15,
+  "regressionChecksPassed": 137,
+  "regressionChecksFailed": 0,
+  "staticQa": { "javascriptFiles": 45, "jsonFiles": 61, "requiredAssets": 16, "failures": 0 },
+  "offlinePipeline": "passed: 3 source files, 7 nodes, 14 edges, 2 POIs",
+  "chromiumSmoke": "BLOCKED: environment policy blocks localhost; not counted as passed",
+  "browserQuotaFaultInjection": "not run",
+  "physicalDeviceValidation": "not run"
+}

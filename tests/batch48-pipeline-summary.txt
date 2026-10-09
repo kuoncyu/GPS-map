@@ -1,0 +1,9 @@
+Batch 48 offline startup recovery pipeline
+Release: 1.1.0-b48
+Focused suite: 10/10 passed
+Listed regression suites: 118/118 passed
+Static QA: 45 JS, 57 JSON, 16 required assets, 0 failures
+Offline data pipeline: PASS (3 files, 7 nodes, 14 edges, 2 POIs)
+Chromium smoke: BLOCKED by environment localhost policy; not counted as pass
+Browser IndexedDB fault injection: NOT RUN
+Physical GPS/device validation: NOT RUN

@@ -1,0 +1,34 @@
+{
+  "batch": 36,
+  "suite": "navigation-flow-contract-and-engine-smoke",
+  "scope": "Node module tests and source contracts; no real browser or device is launched.",
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "results": [
+    {
+      "name": "start handler delegates to NavigationEngine and starts GPS",
+      "status": "PASS"
+    },
+    {
+      "name": "stop handler stops navigation and GPS",
+      "status": "PASS"
+    },
+    {
+      "name": "navigation controls remain present",
+      "status": "PASS"
+    },
+    {
+      "name": "navigation start rejects missing route",
+      "status": "PASS"
+    },
+    {
+      "name": "route-ready -> navigating -> route-ready lifecycle",
+      "status": "PASS"
+    },
+    {
+      "name": "stop does not invent a route",
+      "status": "PASS"
+    }
+  ]
+}

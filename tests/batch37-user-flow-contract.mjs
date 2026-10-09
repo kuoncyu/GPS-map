@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const read=f=>fs.readFileSync(path.join(root,f),'utf8');
+const html=read('index.html'), app=read('js/app.js'), searchUI=read('js/search-ui.js'), routeUI=read('js/route-ui.js'), sw=read('sw.js');
+const results=[];
+function check(name,fn){try{fn();results.push({name,status:'PASS'});}catch(e){results.push({name,status:'FAIL',error:e?.message||String(e)});}}
+check('Search button and Enter key both execute offline search',()=>{assert.match(searchUI,/button\.onclick=run/);assert.match(searchUI,/e\.key==='Enter'\)run\(\)/);});
+check('Selecting search result sets destination and map pin',()=>{assert.match(searchUI,/setState\(\{destination:\{id:p\.id,name:p\.name,lat:p\.lat,lng:p\.lng,address:p\.address,_offlinePackageRecordId:p\._offlinePackageRecordId/);assert.match(searchUI,/map\.showSearchPin\(p\)/);});
+check('Route UI has planning, alternative and clear handlers',()=>{assert.match(routeUI,/routeBtn\.addEventListener|routeBtn\.onclick/);assert.match(routeUI,/alternativeBtn\.addEventListener|alternativeBtn\.onclick/);assert.match(routeUI,/clearBtn\.addEventListener|clearBtn\.onclick/);});
+check('Start navigation delegates to engine and starts GPS',()=>assert.match(app,/\$\('startNavBtn'\)\.addEventListener\('click',[\s\S]*?navigation\.start\(\);gps\.start\(\)/));
+check('Stop navigation stops engine and GPS',()=>assert.match(app,/\$\('stopNavBtn'\)\.addEventListener\('click',[\s\S]*?navigation\.stop\(\);gps\.stop\(\)/));
+check('Offline package download refuses to fetch while offline',()=>{assert.match(app,/if\(!navigator\.onLine\)\{\$\('downloadMessage'\)\.textContent='目前離線/);assert.match(app,/fetch\('\.\/data\/package-manifest\.json'\)/);});
+check('Network state reacts to online and offline events',()=>{assert.match(app,/addEventListener\('online',syncNetwork\)/);assert.match(app,/addEventListener\('offline',syncNetwork\)/);});
+check('Service worker uses current release cache and offline fallback',()=>{assert.match(sw,/ai-gps-release-v1\.1\.0-b60/);assert.match(sw,/caches\.match\('\.\/index\.html'\)/);});
+check('Every service-worker precache asset exists',()=>{const m=sw.match(/const ASSETS=\[([\s\S]*?)\];/);assert.ok(m,'ASSETS array missing');const assets=[...m[1].matchAll(/'([^']+)'/g)].map(x=>x[1]).filter(x=>x!=='./');const missing=assets.filter(a=>!fs.existsSync(path.join(root,a.replace(/^\.\//,''))));assert.deepEqual(missing,[],`missing assets: ${missing.join(', ')}`);});
+check('All key flow controls exist exactly once',()=>{const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);for(const id of ['searchInput','searchBtn','searchResults','routeBtn','alternativeBtn','startNavBtn','stopNavBtn','clearRouteBtn','routeSummary','downloadBtn'])assert.equal(ids.filter(x=>x===id).length,1,`${id} count`);});
+check('Destination selection event and service-worker registration are wired',()=>{assert.match(app,/addEventListener\('ai-gps:select-poi'/);assert.match(app,/navigator\.serviceWorker\.register\('\.\/sw\.js'\)/);});
+const report={batch:37,suite:'user-flow-contract-offline-safety',scope:'Source-level contract checks only. No real browser engine, rendered UI, or physical device was launched.',total:results.length,passed:results.filter(x=>x.status==='PASS').length,failed:results.filter(x=>x.status==='FAIL').length,results};
+fs.writeFileSync(path.join(root,'tests/batch37-user-flow-report.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(report.failed)process.exitCode=1;

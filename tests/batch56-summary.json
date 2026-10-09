@@ -1,0 +1,12 @@
+{
+  "batch": 56,
+  "version": "1.1.0-b56",
+  "focus": "GPS lifecycle validation and navigation recovery consistency",
+  "batchTests": {"total": 12, "passed": 12, "failed": 0},
+  "regressionSuites": {"total": 23, "passed": 23, "failed": 0},
+  "staticQA": {"javascriptFiles": 45, "jsonFiles": 72, "requiredAssets": 16, "failed": 0},
+  "offlinePipeline": {"status": "PASS", "files": 3, "nodes": 7, "edges": 14, "pois": 2},
+  "browserSmoke": "BLOCKED: Chromium navigation to localhost was blocked by organization policy; no browser UI checks passed",
+  "physicalGps": "NOT TESTED",
+  "knownLimits": ["Road and POI data are demonstration data, not a nationwide commercial map", "Real browser IndexedDB and Service Worker acceptance remains outstanding", "Physical device GPS and real-road navigation remain outstanding"]
+}

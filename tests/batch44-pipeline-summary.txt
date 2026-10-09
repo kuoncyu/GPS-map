@@ -1,0 +1,14 @@
+BATCH44_PIPELINE
+- Batch 44 navigation GPS safety: 8/8 PASS
+- Batch 43 GPS stale monitor regression: 8/8 PASS
+- Batch 42 GPS quality regression: 6/6 PASS
+- Batch 41 GPS provider regression: 9/9 PASS
+- Batch 40 browser harness contract: 8/8 PASS
+- Batch 38 offline routing integration: 8/8 PASS
+- Batch 37 user-flow contract: 11/11 PASS
+- Batch 36 navigation flow: 6/6 PASS
+- Batch 35 browser static contract: 13/13 PASS
+- QA static: 44 JS, 48 JSON, 15 required assets, 0 failures
+- Batch 18 offline data pipeline: PASS (3 files, 7 nodes, 14 edges, 2 POIs)
+- Real Chromium smoke: BLOCKED by environment policy (`127.0.0.1 is blocked`); 0 pass, 0 fail, 1 blocked. Not treated as a pass.
+- Physical GPS/device testing: NOT RUN.

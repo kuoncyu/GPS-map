@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {getState,setState} from '../js/state.js';
+import {NavigationEngine} from '../js/navigation.js';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const results=[];
+async function check(name,fn){try{await fn();results.push({name,status:'PASS'});}catch(e){results.push({name,status:'FAIL',error:e?.stack||e?.message||String(e)});}}
+const route={id:'B44-TEST',distance:2000,seconds:240,points:[{lat:25,lng:121,name:'起點'},{lat:25.01,lng:121.01,name:'終點'}],roads:['測試道路'],options:{}};
+let reroutes=0;
+const router={calculate:async()=>{reroutes++;return route;}};
+setState({route,destination:{lat:25.01,lng:121.01,name:'終點'},waypoints:[],currentLocation:{lat:25,lng:121},gpsStatus:'LIVE_GPS',navigationStatus:'ROUTE_READY',remainingDistance:2000,remainingTime:240,ETA:'保持原值',driverAssistance:{ready:true,isLive:true}});
+const engine=new NavigationEngine({router,rerouteDelay:0});
+await check('Starting with reliable GPS begins navigation',()=>{engine.start();assert.equal(getState().navigationStatus,'NAVIGATING');assert.ok(Number.isFinite(getState().remainingDistance));});
+await check('GPS stale transitions active navigation into signal-lost state',()=>{setState({gpsStatus:'GPS_STALE',driverAssistance:{ready:false,isLive:false}});assert.equal(getState().navigationStatus,'GPS_SIGNAL_LOST');});
+await check('Location updates while GPS is stale do not change route metrics or trigger reroute',async()=>{const before=getState();setState({currentLocation:{lat:25.009,lng:121.009}});await new Promise(r=>setTimeout(r,0));const after=getState();assert.equal(after.remainingDistance,before.remainingDistance);assert.equal(after.remainingTime,before.remainingTime);assert.equal(after.ETA,before.ETA);assert.equal(reroutes,0);});
+await check('GPS error status also blocks live navigation updates',async()=>{setState({gpsStatus:'GPS_ERROR_TIMEOUT'});assert.equal(getState().navigationStatus,'GPS_SIGNAL_LOST');setState({currentLocation:{lat:25.008,lng:121.008}});await new Promise(r=>setTimeout(r,0));assert.equal(reroutes,0);});
+await check('Fresh GPS fix resumes navigation and recalculates from current position',()=>{setState({gpsStatus:'LIVE_GPS',currentLocation:{lat:25.002,lng:121.002}});assert.equal(getState().navigationStatus,'NAVIGATING');assert.notEqual(getState().remainingDistance,2000);});
+await check('GPS failure cannot trigger off-route recalculation',async()=>{setState({gpsStatus:'GPS_STALE',driverAssistance:{ready:false,isLive:false}});const before=reroutes;await engine.maybeReroute({...getState(),currentLocation:{lat:25.5,lng:121.5}});assert.equal(reroutes,before);});
+await check('Stopping navigation while GPS is lost returns to route-ready and does not auto-resume',()=>{engine.stop();assert.equal(getState().navigationStatus,'ROUTE_READY');setState({currentLocation:{lat:25.003,lng:121.003}});assert.equal(getState().navigationStatus,'ROUTE_READY');});
+await check('Navigation module explicitly guards unreliable GPS before route metrics and rerouting',()=>{const source=fs.readFileSync(path.join(root,'js/navigation.js'),'utf8');assert.match(source,/hasUnreliableGps/);assert.match(source,/GPS_SIGNAL_LOST/);assert.match(source,/async maybeReroute\(s\)/);assert.match(source,/isStillCurrent/);});
+engine.destroy();
+const report={batch:44,suite:'navigation-gps-loss-safety',scope:'Node.js state/module integration with mocked router and synthetic coordinates; no physical GPS hardware or browser UI',total:results.length,passed:results.filter(x=>x.status==='PASS').length,failed:results.filter(x=>x.status==='FAIL').length,results};
+fs.writeFileSync(path.join(root,'tests/batch44-navigation-gps-safety-report.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(report.failed)process.exitCode=1;

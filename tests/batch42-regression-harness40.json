@@ -1,0 +1,42 @@
+{
+  "batch": 40,
+  "suite": "browser-harness-contract",
+  "executedAt": "2026-10-09T09:12:47.057Z",
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Explicit test target is configurable",
+      "status": "PASS"
+    },
+    {
+      "name": "Explicit test target only permits HTTP or HTTPS",
+      "status": "PASS"
+    },
+    {
+      "name": "Local server is used only when no explicit URL is supplied",
+      "status": "PASS"
+    },
+    {
+      "name": "Chromium executable path is configurable",
+      "status": "PASS"
+    },
+    {
+      "name": "Blocked navigation is not mislabeled as pass",
+      "status": "PASS"
+    },
+    {
+      "name": "Blocked navigation does not trigger a policy bypass",
+      "status": "PASS"
+    },
+    {
+      "name": "Browser report includes target mode and executable",
+      "status": "PASS"
+    },
+    {
+      "name": "Service worker and version contracts match current version",
+      "status": "PASS"
+    }
+  ]
+}

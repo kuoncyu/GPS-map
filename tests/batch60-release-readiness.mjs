@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const results=[];
+async function check(name,fn){try{await fn();results.push({name,status:'PASS'});}catch(e){results.push({name,status:'FAIL',error:e?.stack||e?.message||String(e)});}}
+const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');
+const assets=new Set([...sw.matchAll(/'\.\/([^']+)'/g)].map(m=>m[1]));
+const version=fs.readFileSync(path.join(root,'VERSION'),'utf8').trim();
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'data/manifest.json'),'utf8'));
+await check('Release version, PWA manifest, and service-worker cache match',()=>{assert.equal(version,'1.1.0-b60');assert.equal(manifest.version,version);assert.ok(sw.includes(`ai-gps-release-v${version}`));});
+await check('Every first-party JavaScript, CSS, and JSON asset is precached',()=>{for(const dir of ['js','css','data'])for(const name of fs.readdirSync(path.join(root,dir))){const p=path.join(root,dir,name);if(!fs.statSync(p).isFile())continue;const ext=path.extname(name);if((dir==='js'&&ext!=='.js')||(dir==='css'&&ext!=='.css')||(dir==='data'&&ext!=='.json'))continue;assert.ok(assets.has(`${dir}/${name}`),`Missing from precache: ${dir}/${name}`);}});
+await check('All local script imports resolve to project files',()=>{for(const p of fs.readdirSync(path.join(root,'js')).filter(x=>x.endsWith('.js'))){const source=fs.readFileSync(path.join(root,'js',p),'utf8');for(const m of source.matchAll(/(?:from\s*|import\s*)['"](\.\/[^'"]+)['"]/g)){const target=path.resolve(root,'js',m[1]);assert.ok(target.startsWith(path.join(root,'js')+path.sep));assert.ok(fs.existsSync(target),`${p} imports missing ${m[1]}`);}}});
+await check('All project JSON data files parse',()=>{for(const name of fs.readdirSync(path.join(root,'data')).filter(x=>x.endsWith('.json')))JSON.parse(fs.readFileSync(path.join(root,'data',name),'utf8'));});
+await check('Offline fallback is limited to document navigations',()=>{assert.match(sw,/request\.mode==='navigate'\|\|\(request\.headers\.get\('accept'\)\|\|''\)\.includes\('text\/html'\)/);assert.match(sw,/new Response\('Offline resource unavailable',\{status:503/);});
+await check('Core app shell and map/guidance assets are precached',()=>{for(const p of ['index.html','js/app.js','js/navigation.js','js/routing.js','js/guidance.js','js/gps.js','js/offline-manager.js','js/package-manager.js','css/main.css','data/routes.json','data/places.json'])assert.ok(assets.has(p),`Missing core asset ${p}`);});
+await check('Service worker removes prior release caches on activation',()=>assert.match(sw,/keys\.filter\(key=>key!==CACHE\)/));
+await check('Browser smoke test references current release ID',()=>{const smoke=fs.readFileSync(path.join(root,'tests/batch40-browser-smoke.mjs'),'utf8');assert.ok(smoke.includes(version));assert.ok(smoke.includes("includes('b60')"));});
+const report={suite:'batch60-release-readiness',version,total:results.length,passed:results.filter(x=>x.status==='PASS').length,failed:results.filter(x=>x.status==='FAIL').length,results};
+fs.writeFileSync(path.join(root,'tests/batch60-release-readiness-report.json'),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report,null,2));
+if(report.failed)process.exitCode=1;

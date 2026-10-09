@@ -1,0 +1,41 @@
+{
+  "suite": "batch60-release-readiness",
+  "version": "1.1.0-b60",
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Release version, PWA manifest, and service-worker cache match",
+      "status": "PASS"
+    },
+    {
+      "name": "Every first-party JavaScript, CSS, and JSON asset is precached",
+      "status": "PASS"
+    },
+    {
+      "name": "All local script imports resolve to project files",
+      "status": "PASS"
+    },
+    {
+      "name": "All project JSON data files parse",
+      "status": "PASS"
+    },
+    {
+      "name": "Offline fallback is limited to document navigations",
+      "status": "PASS"
+    },
+    {
+      "name": "Core app shell and map/guidance assets are precached",
+      "status": "PASS"
+    },
+    {
+      "name": "Service worker removes prior release caches on activation",
+      "status": "PASS"
+    },
+    {
+      "name": "Browser smoke test references current release ID",
+      "status": "PASS"
+    }
+  ]
+}

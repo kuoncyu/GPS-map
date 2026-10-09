@@ -1,0 +1,15 @@
+BATCH 47 OFFLINE PACKAGE VERSION RECOVERY
+- Release: 1.1.0-b47
+- Active package pointer stored in IndexedDB meta store
+- Verified package record and active pointer committed in one readwrite transaction
+- Rollback switches active pointer to previous verified version without deleting the newer version
+- Unique immutable package record IDs allow same-version reinstall to retain a prior copy
+- Retention: keep at most two verified versions per package ID
+- Batch 47 focused suite: 11 passed, 0 failed
+- Regression suites: 108 passed, 0 failed across listed automated suites
+- Static QA: 45 JavaScript, 55 JSON, 16 required assets, 0 failures
+- Batch 18 offline graph pipeline: 3 files, 7 nodes, 14 edges, 2 POIs; passed
+- IndexedDB transaction behavior: code contract checked; real browser fault-injection NOT RUN
+- Chromium smoke: BLOCKED by environment localhost policy; not counted as pass
+- Physical device/GPS validation: NOT RUN
+- Known integration gap: some changes from batches 19–34 are not recovered

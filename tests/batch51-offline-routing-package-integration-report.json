@@ -1,0 +1,47 @@
+{
+  "batch": 51,
+  "version": "1.1.0-b51",
+  "suite": "offline-routing-active-package-integration",
+  "scope": "Node.js tests with injected storage/fetch adapters plus static release contract; real browser IndexedDB and device validation not run",
+  "total": 9,
+  "passed": 9,
+  "failed": 0,
+  "results": [
+    {
+      "name": "OfflineRouter loads routes.json from active verified package without network fetch",
+      "status": "PASS"
+    },
+    {
+      "name": "Active package version change invalidates the cached route graph",
+      "status": "PASS"
+    },
+    {
+      "name": "Active package missing routes.json fails closed instead of mixing static route data",
+      "status": "PASS"
+    },
+    {
+      "name": "Invalid active graph structure is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Malformed JSON payload is rejected with a clear error",
+      "status": "PASS"
+    },
+    {
+      "name": "Static route fallback is used only when no active package exists",
+      "status": "PASS"
+    },
+    {
+      "name": "Map metadata reports the actual active package version",
+      "status": "PASS"
+    },
+    {
+      "name": "Routing integration is present in the actual engine and provider contracts",
+      "status": "PASS"
+    },
+    {
+      "name": "Service worker and VERSION identify Batch 51",
+      "status": "PASS"
+    }
+  ]
+}

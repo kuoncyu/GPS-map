@@ -1,0 +1,12 @@
+AI GPS Batch 60 final pipeline summary
+Version: 1.1.0-b60
+Release-readiness tests: 8 passed / 8 total
+Node.js regression: 27 test files passed, 0 failed (2 browser-smoke scripts excluded from the Node regression loop)
+Static QA: 45 JavaScript files, 80 JSON files, 16 required assets, 0 failures
+Offline route pipeline: 3 files, 7 nodes, 14 edges, 2 POIs (PASS)
+Service Worker precache: all first-party JS/CSS/JSON files included (PASS)
+Release version parity: VERSION, PWA manifest, Service Worker cache ID, browser smoke expectation aligned (PASS)
+Offline fallback contract: navigation documents fall back to app shell; non-document resources return 503 when unavailable (PASS by static contract test)
+Chromium local smoke: BLOCKED by organization policy (0 passed, 0 failed)
+Physical GPS/device navigation acceptance: NOT TESTED
+Nationwide commercial map/POI completeness: NOT PROVIDED; bundled graph/POIs are demonstration data

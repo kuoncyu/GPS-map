@@ -1,0 +1,10 @@
+AI GPS Navigation — Batch 51 Pipeline Summary
+Release: 1.1.0-b51
+Focus: active offline package integration with routing engine and map metadata
+Dedicated suite: 9 passed / 0 failed
+Regression suites: 16; 146 automated checks passed / 0 failed
+Static QA: 45 JavaScript files, 63 JSON files, 16 required assets, 0 failures
+Offline data pipeline: passed (3 source files, 7 nodes, 14 edges, 2 POIs)
+Chromium smoke: BLOCKED by environment localhost policy (0 passed, 0 failed, 1 blocked)
+Real browser IndexedDB validation: not run
+Physical-device GPS validation: not run

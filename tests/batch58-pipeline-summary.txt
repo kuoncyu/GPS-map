@@ -1,0 +1,8 @@
+AI GPS Batch 58 pipeline summary
+Version: 1.1.0-b58
+Route transaction tests: 11 passed / 11 total
+Node.js regression: 25 suites passed, 0 failed
+Static QA: 45 JS, 75 JSON, 16 required assets, 0 failures
+Offline pipeline: 3 files, 7 nodes, 14 edges, 2 POIs (PASS)
+Chromium local smoke: BLOCKED by organization policy (0 passed, 0 failed)
+Physical GPS/device navigation acceptance: NOT TESTED

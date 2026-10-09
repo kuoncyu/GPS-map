@@ -1,0 +1,21 @@
+{
+  "batch": 42,
+  "version": "1.1.0-b42",
+  "suiteCounts": {
+    "gpsQuality": {"total": 6, "passed": 6, "failed": 0},
+    "gpsProviderRegression": {"total": 9, "passed": 9, "failed": 0},
+    "browserHarnessContract": {"total": 8, "passed": 8, "failed": 0},
+    "routingRegression": {"total": 8, "passed": 8, "failed": 0},
+    "userFlowRegression": {"total": 11, "passed": 11, "failed": 0},
+    "navigationRegression": {"total": 6, "passed": 6, "failed": 0},
+    "browserSourceContract": {"total": 13, "passed": 13, "failed": 0}
+  },
+  "automatedAssertionsTotal": 61,
+  "automatedAssertionsPassed": 61,
+  "automatedAssertionsFailed": 0,
+  "staticQa": {"javascriptFiles": 44, "jsonFiles": 45, "requiredChecks": 15, "failed": 0},
+  "pipeline": "BATCH18_PIPELINE_OK",
+  "physicalGpsTested": false,
+  "realBrowserUiTested": false,
+  "notes": ["GPS quality tests use deterministic timestamps and simulated APIs.", "markStale() must be called by an application scheduler for automatic stale-state detection."]
+}

@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const runner = fs.readFileSync(path.join(root, 'tests/batch40-browser-smoke.mjs'), 'utf8');
+const setup = fs.readFileSync(path.join(root, 'tests/BROWSER-AUTOMATION-SETUP.md'), 'utf8');
+const results = [];
+function check(name, fn) { try { fn(); results.push({ name, status: 'PASS' }); } catch (e) { results.push({ name, status: 'FAIL', error: e.message }); } }
+check('Explicit test target is configurable', () => assert.match(runner, /process\.env\.AI_GPS_TEST_URL/));
+check('Explicit test target only permits HTTP or HTTPS', () => { assert.match(runner, /\['http:', 'https:'\]\.includes\(parsed\.protocol\)/); assert.match(runner, /embedded credentials/); });
+check('Local server is used only when no explicit URL is supplied', () => assert.match(runner, /else \{ await new Promise\(resolve => server\.listen/));
+check('Chromium executable path is configurable', () => assert.match(runner, /process\.env\.CHROMIUM_PATH \|\| '\/usr\/bin\/chromium'/));
+check('Blocked navigation is not mislabeled as pass', () => { assert.match(runner, /status: 'BLOCKED'/); assert.match(runner, /BROWSER_NAVIGATION_BLOCKED/); });
+check('Blocked navigation does not trigger a policy bypass', () => { assert.match(setup, /Do not try to bypass organization browser restrictions/); assert.doesNotMatch(runner, /--ignore-certificate-errors|--disable-web-security/); });
+check('Browser report includes target mode and executable', () => { assert.match(runner, /targetMode: requestedURL \? 'explicit-AI_GPS_TEST_URL'/); assert.match(runner, /chromiumPath:/); });
+check('Service worker and version contracts match current version', () => { assert.match(fs.readFileSync(path.join(root, 'sw.js'), 'utf8'), /ai-gps-release-v1\.1\.0-b60/); assert.match(fs.readFileSync(path.join(root, 'VERSION'), 'utf8'), /1\.1\.0-b60/); assert.match(runner, /ai-gps-release-v1\.1\.0-b60/); });
+const report = { batch: 40, suite: 'browser-harness-contract', executedAt: new Date().toISOString(), total: results.length, passed: results.filter(x => x.status === 'PASS').length, failed: results.filter(x => x.status === 'FAIL').length, results };
+fs.writeFileSync(path.join(root, 'tests/batch40-browser-harness-contract-report.json'), JSON.stringify(report, null, 2) + '\n');
+console.log(JSON.stringify(report, null, 2));
+if (report.failed) process.exitCode = 1;

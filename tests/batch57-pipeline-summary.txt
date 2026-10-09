@@ -1,0 +1,7 @@
+BATCH57_PIPELINE_OK
+Focused reroute-contract suite: 13/13 passed.
+Automated Node.js regression suites: 24 passed, 0 failed; two browser-smoke scripts were skipped and are not counted as passes.
+Static QA: 45 JavaScript files, 74 JSON files, 16 required assets, 0 failures.
+Offline data pipeline: 3 files, 7 nodes, 14 edges, 2 POIs; passed.
+Real Chromium/browser UI smoke: BLOCKED; 0 passed, 0 failed. Chromium reported that localhost is blocked by organization policy.
+Physical GPS/device acceptance: NOT TESTED.

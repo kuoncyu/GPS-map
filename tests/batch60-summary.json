@@ -1,0 +1,13 @@
+{
+  "batch": 60,
+  "version": "1.1.0-b60",
+  "focus": "release readiness, service worker precache completeness, and offline fallback correctness",
+  "specializedTests": {"passed": 8, "total": 8, "failed": 0},
+  "nodeRegression": {"passedSuites": 27, "failedSuites": 0, "browserSmokeScriptsExcluded": 2},
+  "staticQA": {"javascriptFiles": 45, "jsonFiles": 80, "requiredAssets": 16, "failures": 0},
+  "offlinePipeline": {"files": 3, "nodes": 7, "edges": 14, "pois": 2, "status": "PASS"},
+  "serviceWorkerPrecache": {"firstPartyJsCssJsonCovered": true, "status": "PASS"},
+  "chromiumSmoke": {"status": "BLOCKED", "passed": 0, "failed": 0, "reason": "Organization policy blocks localhost navigation"},
+  "deviceAcceptance": "NOT_TESTED",
+  "commercialMapCoverage": "DEMO_DATA_ONLY"
+}

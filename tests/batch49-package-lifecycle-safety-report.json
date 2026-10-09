@@ -1,0 +1,55 @@
+{
+  "batch": 49,
+  "version": "1.1.0-b49",
+  "suite": "offline-package-lifecycle-safety",
+  "scope": "PackageManager tests with mocked storage plus static IndexedDB transaction contract checks; browser IndexedDB race/fault injection not run",
+  "total": 11,
+  "passed": 11,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Storage cleanup runs package and active-pointer reads in one write transaction",
+      "status": "PASS"
+    },
+    {
+      "name": "Cleanup retains the active package even when it is older than retention limit",
+      "status": "PASS"
+    },
+    {
+      "name": "Cleanup retains at least one verified package per package family",
+      "status": "PASS"
+    },
+    {
+      "name": "Cleanup does not use unverified records as retained versions",
+      "status": "PASS"
+    },
+    {
+      "name": "Package manager serializes cleanup after an in-flight operation",
+      "status": "PASS"
+    },
+    {
+      "name": "Rollback is queued through the package manager operation gate",
+      "status": "PASS"
+    },
+    {
+      "name": "Install and rollback share a serialized operation queue",
+      "status": "PASS"
+    },
+    {
+      "name": "Active package is re-read after cleanup and exposed in result",
+      "status": "PASS"
+    },
+    {
+      "name": "Current release and service worker cache align to Batch 49",
+      "status": "PASS"
+    },
+    {
+      "name": "Package pruning is constrained to verified records and keeps active id",
+      "status": "PASS"
+    },
+    {
+      "name": "Retention limit is normalized to a positive integer",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "batch": 46,
+  "suite": "offline-package-manifest-and-payload-integrity",
+  "scope": "Node.js verification tests with deterministic mocked HTTP payloads; no browser UI, real network, or physical GPS",
+  "total": 12,
+  "passed": 12,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Accepts a structurally valid manifest and a real SHA-256 file record",
+      "status": "PASS"
+    },
+    {
+      "name": "Rejects demo placeholders, zero-size files and invalid hashes",
+      "status": "PASS"
+    },
+    {
+      "name": "Rejects a declared total size that differs from the sum of payload sizes",
+      "status": "PASS"
+    },
+    {
+      "name": "Rejects absolute paths, parent traversal and duplicate file paths",
+      "status": "PASS"
+    },
+    {
+      "name": "Downloads and verifies each payload by exact size and SHA-256",
+      "status": "PASS"
+    },
+    {
+      "name": "Rejects an altered manifest file list using aggregate SHA-256",
+      "status": "PASS"
+    },
+    {
+      "name": "Rejects payload with incorrect byte length",
+      "status": "PASS"
+    },
+    {
+      "name": "Rejects payload with incorrect SHA-256 even if its byte length matches",
+      "status": "PASS"
+    },
+    {
+      "name": "Rejects missing HTTP resources without marking package verified",
+      "status": "PASS"
+    },
+    {
+      "name": "Installer commits only after file verification and keeps prior stable package on failure",
+      "status": "PASS"
+    },
+    {
+      "name": "Manifest describes real, non-empty local data files with matching SHA-256 and aggregate hash",
+      "status": "PASS"
+    },
+    {
+      "name": "Release cache and version identifiers are aligned to Batch 47",
+      "status": "PASS"
+    }
+  ]
+}

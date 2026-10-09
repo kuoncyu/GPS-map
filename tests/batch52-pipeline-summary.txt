@@ -1,0 +1,11 @@
+AI GPS Navigation — Batch 52 Pipeline Summary
+Release: 1.1.0-b52
+Focus: Offline POI search and active package consistency
+Dedicated tests: 12 passed / 0 failed
+Listed regression checks: 158 passed / 0 failed
+Static QA: 45 JS, 65 JSON, 16 required assets, 0 failures
+Offline data pipeline: 3 source files, 7 nodes, 14 edges, 2 POIs — PASS
+Chromium smoke: BLOCKED by environment localhost policy (not counted as pass)
+Real browser IndexedDB / Service Worker acceptance: NOT RUN
+Physical GPS/device navigation: NOT RUN
+Demo roads and POIs are not a full nationwide commercial map dataset.

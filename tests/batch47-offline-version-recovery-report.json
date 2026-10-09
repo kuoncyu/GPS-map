@@ -1,0 +1,54 @@
+{
+  "batch": 47,
+  "suite": "offline-package-version-activation-rollback-and-recovery",
+  "scope": "Node.js package-manager tests with in-memory Storage and deterministic mocked payload downloads; IndexedDB transaction behavior contract-checked, not browser-executed",
+  "total": 11,
+  "passed": 11,
+  "failed": 0,
+  "results": [
+    {
+      "name": "IndexedDB storage commits package data and active pointer in a single transaction",
+      "status": "PASS"
+    },
+    {
+      "name": "Install activates a verified version with a unique immutable record ID",
+      "status": "PASS"
+    },
+    {
+      "name": "Installing a new version retains a rollback candidate and atomically activates latest",
+      "status": "PASS"
+    },
+    {
+      "name": "Rollback switches active pointer to previous verified version without deleting the newer version",
+      "status": "PASS"
+    },
+    {
+      "name": "Inspect follows active pointer instead of choosing newest installed timestamp",
+      "status": "PASS"
+    },
+    {
+      "name": "Failed integrity verification does not activate or replace the stable package",
+      "status": "PASS"
+    },
+    {
+      "name": "Rollback refuses to activate unverified or empty-payload packages",
+      "status": "PASS"
+    },
+    {
+      "name": "Rollback reports absence of an earlier version without deleting current package",
+      "status": "PASS"
+    },
+    {
+      "name": "Retention policy keeps at most two verified versions for one package",
+      "status": "PASS"
+    },
+    {
+      "name": "Current release version and service-worker cache align to Batch 47",
+      "status": "PASS"
+    },
+    {
+      "name": "Package manager uses atomic activation and no longer deletes the active version during rollback",
+      "status": "PASS"
+    }
+  ]
+}

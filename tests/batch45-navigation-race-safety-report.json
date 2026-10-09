@@ -1,0 +1,42 @@
+{
+  "batch": 45,
+  "suite": "navigation-state-machine-and-async-reroute-race-safety",
+  "scope": "Node.js module integration with synthetic state and deferred mocked router; no browser UI or physical GPS",
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "results": [
+    {
+      "name": "State machine allows documented active navigation transitions and rejects illegal transition",
+      "status": "PASS"
+    },
+    {
+      "name": "A late reroute result cannot overwrite a user stop",
+      "status": "PASS"
+    },
+    {
+      "name": "A late reroute result is discarded after GPS signal loss",
+      "status": "PASS"
+    },
+    {
+      "name": "A late reroute result cannot overwrite an arrival state",
+      "status": "PASS"
+    },
+    {
+      "name": "A reroute result is discarded if the planned route changes while calculation is pending",
+      "status": "PASS"
+    },
+    {
+      "name": "A current reroute result is accepted while navigation remains valid",
+      "status": "PASS"
+    },
+    {
+      "name": "Reroute failures only set OFF_ROUTE when the original navigation is still current",
+      "status": "PASS"
+    },
+    {
+      "name": "Release cache and version identifiers are aligned to current Batch 47",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "batch": 49,
+  "version": "1.1.0-b49",
+  "focus": "offline package lifecycle, safe pruning, serialized package operations",
+  "dedicatedSuite": "tests/batch49-package-lifecycle-safety.mjs",
+  "dedicatedPassed": 11,
+  "dedicatedFailed": 0,
+  "browserIndexedDBFaultInjection": "not run",
+  "physicalDeviceValidation": "not run"
+}

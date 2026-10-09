@@ -1,0 +1,9 @@
+AI GPS offline package pipeline — Batch 49
+Release: 1.1.0-b49
+Focus: package lifecycle serialization and safe retention pruning
+Dedicated checks: 11 passed, 0 failed
+Static QA: 45 JS, 59 JSON, 16 required assets, 0 failures
+Offline routing fixture: 7 nodes, 14 edges, 2 POIs — passed
+Browser IndexedDB fault injection: not run
+Chromium smoke: environment may block localhost; do not count as pass
+Physical GPS / real road validation: not run

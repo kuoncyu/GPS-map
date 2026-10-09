@@ -1,0 +1,6 @@
+BATCH55_PIPELINE_OK
+Static QA: 45 JS, 68 JSON, 16 required assets, 0 failures.
+Offline pipeline: 3 files, 7 nodes, 14 edges, 2 POIs.
+Batch55 focused suite: 8/8.
+Selected regression: 147/147 across 16 suites.
+Real Chromium/browser and physical GPS tests are not claimed.

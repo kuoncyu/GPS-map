@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+let watchSuccess, watchError, watchCount=0, clearedWatches=[];
+const geolocation={watchPosition(ok,fail){watchCount++;watchSuccess=ok;watchError=fail;return 23;},clearWatch(id){clearedWatches.push(id);}};
+Object.defineProperty(globalThis,'navigator',{configurable:true,value:{onLine:true,geolocation}});
+const {getState}=await import('../js/state.js');
+const {BrowserGeolocationProvider}=await import('../js/gps-provider.js');
+const checks=[];
+function check(name,fn){try{const detail=fn();checks.push({name,status:'PASS',...(detail===undefined?{}:{detail})});}catch(e){checks.push({name,status:'FAIL',error:e?.message||String(e)});}}
+let tick=null, clearedTimers=[];const scheduler={setInterval(fn,ms){tick=fn;return {id:41,ms};},clearInterval(id){clearedTimers.push(id);}};
+const provider=new BrowserGeolocationProvider({maxFixAgeMs:30000,staleCheckIntervalMs:1000,scheduler});
+check('GPS start arms one stale monitor and one geolocation watch',()=>{assert.equal(provider.start(),true);assert.equal(watchCount,1);assert.equal(typeof tick,'function');assert.equal(provider.staleMonitorId.ms,1000);return {watchCount,intervalMs:provider.staleMonitorId.ms};});
+check('Repeated start does not duplicate stale monitor',()=>{const monitor=provider.staleMonitorId;provider.start();assert.equal(provider.staleMonitorId,monitor);assert.equal(watchCount,1);});
+check('Fresh fix keeps live navigation assistance enabled',()=>{watchSuccess({timestamp:Date.now(),coords:{latitude:25.04,longitude:121.52,accuracy:8,heading:20,speed:4}});assert.equal(getState().gpsStatus,'LIVE_GPS');assert.equal(getState().driverAssistance.isLive,true);});
+check('Scheduled stale check degrades live state after fix expires',()=>{provider.last.timestamp=Date.now()-40000;provider.lastFixAt=provider.last.timestamp;tick();assert.equal(getState().gpsStatus,'GPS_STALE');assert.equal(getState().gpsQuality,'stale');assert.equal(getState().driverAssistance.ready,false);assert.equal(getState().driverAssistance.isLive,false);});
+check('Repeated stale ticks do not repeatedly re-emit stale transition',()=>{assert.equal(provider.markStale(Date.now()+100000),false);});
+check('New valid fix recovers from stale status',()=>{watchSuccess({timestamp:Date.now(),coords:{latitude:25.05,longitude:121.53,accuracy:10}});assert.equal(getState().gpsStatus,'LIVE_GPS');assert.equal(getState().driverAssistance.isLive,true);});
+check('Stop cancels timer and browser watch and disables live assistance',()=>{provider.stop();assert.equal(provider.staleMonitorId,null);assert.equal(clearedTimers.length,1);assert.equal(clearedWatches.includes(23),true);assert.equal(getState().gpsStatus,'GPS_STOPPED');assert.equal(getState().driverAssistance.isLive,false);});
+check('Monitor scheduler absence is handled without throwing',()=>{const p=new BrowserGeolocationProvider({scheduler:{}});assert.equal(p.start(),true);assert.equal(p.staleMonitorId,null);p.stop();return {monitor:'not available; provider remains manually controllable'};});
+const report={batch:43,suite:'gps-stale-monitor-lifecycle',scope:'Node.js with simulated Geolocation API and injected deterministic scheduler; no physical GPS/browser permission UI',total:checks.length,passed:checks.filter(x=>x.status==='PASS').length,failed:checks.filter(x=>x.status==='FAIL').length,results:checks};
+fs.writeFileSync(path.join(root,'tests/batch43-gps-stale-monitor-report.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(report.failed)process.exitCode=1;

@@ -1,0 +1,10 @@
+AI GPS Navigation — Batch 50 Pipeline Summary
+Release: 1.1.0-b50
+Focus: offline storage quota and install failure safety
+Dedicated suite: 8 passed / 0 failed
+Regression suites: 15; 137 automated checks passed / 0 failed
+Static QA: 45 JavaScript files, 61 JSON files, 16 required assets, 0 failures
+Offline data pipeline: passed (3 source files, 7 nodes, 14 edges, 2 POIs)
+Chromium smoke: BLOCKED by environment localhost policy (0 passed, 0 failed, 1 blocked)
+Real browser quota fault injection: not run
+Physical-device GPS validation: not run
