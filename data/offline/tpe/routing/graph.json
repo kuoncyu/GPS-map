@@ -1,0 +1,204 @@
+{
+  "schema": "offline-routing-2",
+  "region": "Taipei-Demo",
+  "nodes": [
+    {
+      "id": "N0",
+      "lat": 25.0478,
+      "lng": 121.5319,
+      "name": "中央大道"
+    },
+    {
+      "id": "N1",
+      "lat": 25.0485,
+      "lng": 121.535,
+      "name": "中央大道"
+    },
+    {
+      "id": "N2",
+      "lat": 25.0472,
+      "lng": 121.5378,
+      "name": "中央大道"
+    },
+    {
+      "id": "N3",
+      "lat": 25.051,
+      "lng": 121.541,
+      "name": "科技路"
+    },
+    {
+      "id": "N4",
+      "lat": 25.046,
+      "lng": 121.544,
+      "name": "科技路"
+    },
+    {
+      "id": "N5",
+      "lat": 25.054,
+      "lng": 121.528,
+      "name": "北安路"
+    },
+    {
+      "id": "N6",
+      "lat": 25.0445,
+      "lng": 121.5405,
+      "name": "河岸路"
+    }
+  ],
+  "edges": [
+    {
+      "from": "N0",
+      "to": "N1",
+      "name": "中央大道",
+      "type": "CITY",
+      "distanceM": 322,
+      "timeS": 23,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N1",
+      "to": "N0",
+      "name": "中央大道",
+      "type": "CITY",
+      "distanceM": 322,
+      "timeS": 23,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N1",
+      "to": "N2",
+      "name": "中央大道",
+      "type": "CITY",
+      "distanceM": 317,
+      "timeS": 23,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N2",
+      "to": "N1",
+      "name": "中央大道",
+      "type": "CITY",
+      "distanceM": 317,
+      "timeS": 23,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N2",
+      "to": "N3",
+      "name": "科技路",
+      "type": "HIGHWAY",
+      "distanceM": 531,
+      "timeS": 32,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N3",
+      "to": "N2",
+      "name": "科技路",
+      "type": "HIGHWAY",
+      "distanceM": 531,
+      "timeS": 32,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N3",
+      "to": "N4",
+      "name": "科技路",
+      "type": "HIGHWAY",
+      "distanceM": 633,
+      "timeS": 38,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N4",
+      "to": "N3",
+      "name": "科技路",
+      "type": "HIGHWAY",
+      "distanceM": 633,
+      "timeS": 38,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N0",
+      "to": "N5",
+      "name": "北安路",
+      "type": "CITY",
+      "distanceM": 793,
+      "timeS": 57,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N5",
+      "to": "N0",
+      "name": "北安路",
+      "type": "CITY",
+      "distanceM": 793,
+      "timeS": 57,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N2",
+      "to": "N6",
+      "name": "河岸路",
+      "type": "CITY",
+      "distanceM": 405,
+      "timeS": 36,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N6",
+      "to": "N2",
+      "name": "河岸路",
+      "type": "CITY",
+      "distanceM": 405,
+      "timeS": 36,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N6",
+      "to": "N4",
+      "name": "河岸路",
+      "type": "CITY",
+      "distanceM": 390,
+      "timeS": 35,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    },
+    {
+      "from": "N4",
+      "to": "N6",
+      "name": "河岸路",
+      "type": "CITY",
+      "distanceM": 390,
+      "timeS": 35,
+      "toll": false,
+      "ferry": false,
+      "unpaved": false
+    }
+  ]
+}
