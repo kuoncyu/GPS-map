@@ -1,0 +1,9 @@
+import {OfflineSearch} from './search.js';
+import {getState,setState} from './state.js';
+export function mountSearch({input,button,chips,results,status,nearbyBtn,map}){
+ const engine=new OfflineSearch();let category='全部',nearby=false;
+ const renderChips=()=>{chips.innerHTML=engine.categories.map(c=>`<button class="chip ${c===category?'active':''}" data-cat="${c}">${c}</button>`).join('');chips.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{category=b.dataset.cat;renderChips();run()});};
+ const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+ async function run(){status.textContent='正在查詢離線索引…';try{const s=getState();const list=await engine.query({text:input.value,category,nearby:nearby&&s.currentLocation});results.innerHTML=list.length?list.map(p=>`<article class="result-card" data-id="${p.id}"><div class="result-line"><strong>${esc(p.name)}</strong><span class="rating">★ ${p.rating.toFixed(1)}</span></div><small>${esc(p.category)} · ${esc(p.address)}</small><small>${p.distance!=null?(p.distance<1000?Math.round(p.distance)+' m':(p.distance/1000).toFixed(1)+' km')+' · ':''}${esc(p.tags.join(' · '))}</small></article>`).join(''):'<div class="empty-search">找不到符合條件的離線資料</div>';status.textContent=`離線索引 · ${list.length} 筆結果`;results.querySelectorAll('.result-card').forEach(card=>card.onclick=()=>{const p=list.find(x=>x.id===card.dataset.id);setState({destination:{id:p.id,name:p.name,lat:p.lat,lng:p.lng,address:p.address,_offlinePackageRecordId:p._offlinePackageRecordId||null,_offlinePackageId:p._offlinePackageId||null,_offlinePackageVersion:p._offlinePackageVersion||null}});map.showSearchPin(p);status.textContent=`已選擇：${p.name}`});}catch(e){status.textContent=e.message}}
+ button.onclick=run;input.addEventListener('keydown',e=>{if(e.key==='Enter')run()});nearbyBtn.onclick=()=>{nearby=!nearby;nearbyBtn.textContent=nearby?'附近 ✓':'附近';run()};renderChips();run();return {run};
+}

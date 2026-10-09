@@ -1,0 +1,2 @@
+import {WeatherEngine} from './weather.js';
+export async function mountWeather({container}){const e=new WeatherEngine();try{const w=await e.init();container.innerHTML=`<div class="weather-main"><b>${w.condition}</b><strong>${w.temperatureC}°C</strong></div><div class="weather-meta">濕度 ${w.humidity}% · 能見度 ${w.visibilityKm} km · 降雨機率 ${w.rainProbability}%</div><small>快照：${w.observedAt.replace('T',' ').replace('+08:00','')} · 非即時</small>`;}catch{container.textContent='離線天氣資料載入失敗';}}

@@ -1,0 +1,9 @@
+import {setState,getState} from './state.js';
+export class DemoGPS{
+  constructor(){this.timer=null;this.t=0;this.path=[{x:60,y:500},{x:160,y:450},{x:250,y:385},{x:340,y:335},{x:430,y:325},{x:520,y:355},{x:620,y:420},{x:730,y:475},{x:840,y:430},{x:940,y:380}];}
+  start(){if(this.timer)return;setState({navigationStatus:'DEMO_NAVIGATING',speed:48,accuracy:8});this.timer=setInterval(()=>this.tick(),50)}
+  stop(){clearInterval(this.timer);this.timer=null;setState({speed:0,navigationStatus:'DEMO_READY'})}
+  tick(){const s=getState();if(s.route?.points?.length&&['NAVIGATING','OFF_ROUTE'].includes(s.navigationStatus)){this.t+=.012;if(this.t>1)this.t=1;const pts=s.route.points;const n=pts.length-1;const pos=this.routeSample(pts,this.t);const next=this.routeSample(pts,Math.min(1,this.t+.004));const heading=(Math.atan2(next.lng-pos.lng,next.lat-pos.lat)*180/Math.PI+360)%360;setState({currentLocation:pos,heading,speed:48+Math.sin(this.t*12)*3,accuracy:8});if(this.t>=1){this.stop();return;}return;}this.t+=.012;if(this.t>1)this.t=0;const p=this.sample(this.t);const p2=this.sample(Math.min(1,this.t+.003));const heading=Math.atan2(p2.y-p.y,p2.x-p.x)*180/Math.PI+90;const lng=121.5319+(p.x-470)/18000;const lat=25.0478-(p.y-330)/18000;setState({currentLocation:{lat,lng},heading,speed:48+Math.sin(this.t*12)*3,accuracy:8,currentRoad:'中央大道'});}
+ routeSample(points,t){const d=[];let total=0;for(let i=0;i<points.length-1;i++){const dx=points[i+1].lng-points[i].lng,dy=points[i+1].lat-points[i].lat;const len=Math.hypot(dx,dy);d.push(len);total+=len;}let target=t*total;for(let i=0;i<d.length;i++){if(target<=d[i]){const f=d[i]?target/d[i]:0;return {lat:points[i].lat+(points[i+1].lat-points[i].lat)*f,lng:points[i].lng+(points[i+1].lng-points[i].lng)*f};}target-=d[i];}return points.at(-1);}
+  sample(t){const n=this.path.length-1;const s=Math.min(n-1,Math.floor(t*n));const f=t*n-s;const a=this.path[s],b=this.path[s+1];return{x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f}}
+}
