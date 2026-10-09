@@ -1,0 +1,11 @@
+{
+  "type":"FeatureCollection","region":"Taipei-Demo",
+  "features":[
+    {"type":"Feature","properties":{"name":"中央大道","type":"CITY","speedKmh":50},"geometry":{"type":"LineString","coordinates":[[121.5319,25.0478],[121.5350,25.0485],[121.5378,25.0472]]}},
+    {"type":"Feature","properties":{"name":"科技路","type":"HIGHWAY","speedKmh":60},"geometry":{"type":"LineString","coordinates":[[121.5378,25.0472],[121.5410,25.0510],[121.5440,25.0460]]}},
+    {"type":"Feature","properties":{"name":"北安路","type":"CITY","speedKmh":50},"geometry":{"type":"LineString","coordinates":[[121.5319,25.0478],[121.5280,25.0540]]}},
+    {"type":"Feature","properties":{"name":"河岸路","type":"CITY","speedKmh":40},"geometry":{"type":"LineString","coordinates":[[121.5378,25.0472],[121.5405,25.0445],[121.5440,25.0460]]}},
+    {"type":"Feature","properties":{"id":"P1","name":"中央咖啡館","category":"咖啡","address":"中央大道 88 號","tags":["早餐","Wi-Fi"]},"geometry":{"type":"Point","coordinates":[121.5350,25.0485]}},
+    {"type":"Feature","properties":{"id":"P2","name":"河岸充電站","category":"充電","address":"河岸路 58 號","tags":["EV"]},"geometry":{"type":"Point","coordinates":[121.5440,25.0460]}}
+  ]
+}
