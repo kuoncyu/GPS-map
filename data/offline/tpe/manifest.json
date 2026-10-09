@@ -1,0 +1,31 @@
+{
+  "packageId": "OFFLINE-TAIPEI-DEMO",
+  "version": "2026-10-08",
+  "schemaVersion": 2,
+  "region": "Taipei-Demo",
+  "createdAt": "2026-10-08T10:57:45.429Z",
+  "requires": [
+    "base-map",
+    "routing",
+    "search-index"
+  ],
+  "files": [
+    {
+      "path": "poi/places.json",
+      "size": 399,
+      "sha256": "07b8caf0793a0faf03f30b02345c07d643b3c17a4112d5b54f1b607f46ecb53d"
+    },
+    {
+      "path": "routing/graph.json",
+      "size": 3762,
+      "sha256": "087148eb700afc92ea19c335624bb0aac99570aa05e38fbc04cf740611c6399c"
+    },
+    {
+      "path": "search/index.json",
+      "size": 666,
+      "sha256": "5ff6e54282e8b04a4eb2d67e084223c6b0ed5285d6b946618e7cbe6c6b97b7bd"
+    }
+  ],
+  "sizeBytes": 4827,
+  "sha256": "5fea2e837c8379b92e8fdb04bcde119a9e5074176ad09edbfdc53f2206d7c3e6"
+}
