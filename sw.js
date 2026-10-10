@@ -1,4 +1,4 @@
-const CACHE='ai-gps-release-v1.1.0-b60-hotfix1';
+const CACHE='ai-gps-release-v1.1.0-b60-hotfix2-osm';
 const ASSETS=[
 './','./index.html','./css/reset.css','./css/variables.css','./css/main.css','./css/map.css','./css/offline.css',
 './js/app.js','./js/state.js','./js/providers.js','./js/provider-contracts.js','./js/gps-provider.js','./js/gps-quality.js','./js/map-provider.js','./js/routing-provider.js','./js/provider-manager.js','./js/provider-ui.js',
@@ -10,6 +10,8 @@ self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=
 self.addEventListener('fetch',event=>{
   const request=event.request;
   if(request.method!=='GET')return;
+  // External map tiles must use the provider/browser cache policy; do not cache-proxy OSM tiles here.
+  if(new URL(request.url).origin!==self.location.origin)return;
   event.respondWith(caches.match(request).then(cached=>{
     if(cached)return cached;
     return fetch(request).then(response=>{
