@@ -1,4 +1,4 @@
-const CACHE='ai-gps-release-v1.1.0-b60';
+const CACHE='ai-gps-release-v1.1.0-b60-hotfix1';
 const ASSETS=[
 './','./index.html','./css/reset.css','./css/variables.css','./css/main.css','./css/map.css','./css/offline.css',
 './js/app.js','./js/state.js','./js/providers.js','./js/provider-contracts.js','./js/gps-provider.js','./js/gps-quality.js','./js/map-provider.js','./js/routing-provider.js','./js/provider-manager.js','./js/provider-ui.js',
