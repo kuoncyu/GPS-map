@@ -1,6 +1,15 @@
 import {BaseProvider,ProviderKind} from './provider-contracts.js';
 import {Storage} from './storage.js';
 
+// Change this single configuration to use another provider with suitable terms.
+export const DEFAULT_TILE_MAP = Object.freeze({
+  id: 'openstreetmap-standard',
+  template: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  attribution: '© OpenStreetMap contributors',
+  attributionUrl: 'https://www.openstreetmap.org/copyright',
+  requiresNetwork: true
+});
+
 export class OfflineVectorMapProvider extends BaseProvider{
   constructor({id='offline-vector',packageId='TW-TPE'}={}){super({id,kind:ProviderKind.MAP,live:false,offline:true});this.packageId=packageId;}
   async getMapMetadata(){let active=null;try{active=await Storage.reconcileActivePackage?.();}catch{}if(!active?.verified||!Array.isArray(active.payloads)||!active.payloads.length){try{active=await Storage.getActivePackage?.();}catch{}}const usable=active?.verified&&Array.isArray(active.payloads)&&active.payloads.length;return {provider:this.id,packageId:usable?active.packageId:this.packageId,packageVersion:usable?active.version:null,packageRecordId:usable?active.id:null,isLive:false,offlineAvailable:Boolean(usable),format:'offline-package'};}
