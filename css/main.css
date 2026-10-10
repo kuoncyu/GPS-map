@@ -18,3 +18,6 @@ button,input,select{font-size:16px}.map-controls button,.nav-top button,.icon-bt
 @media(max-width:1100px){.navigation-layout{grid-template-columns:minmax(0,1fr) 320px}}
 @media(max-width:850px){.navigation-layout{grid-template-columns:1fr}.side-panel{display:none}.ui-toolbar{top:72px}.bottom-panel{min-height:70px}.bottom-panel button{min-height:52px}}
 .provider-card{display:grid;gap:8px}.provider-row{display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.045)}.provider-row span{font-size:10px;opacity:.65}.provider-row b{font-size:13px}.provider-row small{font-size:10px;opacity:.65}.provider-note{font-size:11px;line-height:1.5;opacity:.65;margin-top:3px}
+
+/* Modals must remain closed until explicitly opened by user action. */
+#routePreview[hidden],#downloadCenter[hidden]{display:none!important;visibility:hidden!important;pointer-events:none!important}
